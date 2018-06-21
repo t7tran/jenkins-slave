@@ -2,6 +2,8 @@ FROM jenkins/jnlp-slave:3.19-1
 
 USER root
 
+ENV TZ=Australia/Melbourne
+
 COPY entrypoint.sh /
 
 RUN apt-get update && apt-get upgrade -y && apt-get install -y tzdata maven && \
