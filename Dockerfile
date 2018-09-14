@@ -28,7 +28,7 @@ RUN groupadd -g ${gid} ${group} && \
     chmod 755 /usr/share/jenkins && \
     chmod 644 /usr/share/jenkins/slave.jar && \
 # additional setup
-    apt-get update && apt-get upgrade -y && apt-get install -y gnupg screen mc vim && \
+    apt-get update && apt-get upgrade -y && apt-get install -y gnupg && \
 # install oracle jdk8
     echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list && \
     echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list && \
@@ -38,7 +38,7 @@ RUN groupadd -g ${gid} ${group} && \
     echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections && \
     echo -e 'y\ny' | apt-get install -y oracle-java8-installer && \
 # install maven and timezone data
-    apt-get install -y tzdata maven && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata maven && \
 # install docker
     apt install -y apt-transport-https ca-certificates curl software-properties-common && \
     curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
@@ -67,6 +67,10 @@ RUN groupadd -g ${gid} ${group} && \
     chmod u+x /entrypoint.sh && \
 # always run mvn in batch mode
     sed -i 's/${CLASSWORLDS_LAUNCHER} "$@"/${CLASSWORLDS_LAUNCHER} "$@" $MAVEN_OPTIONS/g' /usr/share/maven/bin/mvn && \
+# install additional tools
+    apt-get install -y screen mc vim && \
+    gosu ${user} bash -c 'echo shell /bin/bash > ~/.screenrc' && \
+# clean up
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* /tmp/*
 
