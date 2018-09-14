@@ -28,7 +28,7 @@ RUN groupadd -g ${gid} ${group} && \
     chmod 755 /usr/share/jenkins && \
     chmod 644 /usr/share/jenkins/slave.jar && \
 # additional setup
-    apt-get update && apt-get upgrade -y && apt-get install -y gnupg && \
+    apt-get update && apt-get upgrade -y && apt-get install -y gnupg screen mc vim && \
 # install oracle jdk8
     echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list && \
     echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list && \
