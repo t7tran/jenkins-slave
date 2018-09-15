@@ -1,0 +1,2 @@
+shell /bin/bash
+termcapinfo xterm* ti@:te@
