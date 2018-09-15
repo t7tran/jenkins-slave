@@ -5,7 +5,7 @@ FROM ubuntu:18.04
 ENV TZ=Australia/Melbourne \
     JAVA_HOME=/usr/lib/jvm/java-8-oracle
 
-COPY entrypoint.sh /
+COPY ./* /
 COPY --from=slave /usr/share/jenkins/slave.jar /usr/share/jenkins/
 COPY --from=jnlp /usr/local/bin/jenkins-slave /usr/local/bin/jenkins-slave
 
@@ -69,7 +69,8 @@ RUN groupadd -g ${gid} ${group} && \
     sed -i 's/${CLASSWORLDS_LAUNCHER} "$@"/${CLASSWORLDS_LAUNCHER} "$@" $MAVEN_OPTIONS/g' /usr/share/maven/bin/mvn && \
 # install additional tools
     apt-get install -y screen mc vim && \
-    gosu ${user} bash -c 'echo shell /bin/bash > ~/.screenrc' && \
+    mv /.bashrc /.inputrc /.screenrc /.vimrc /home/${user} && \
+    chown -R ${user}:${group} /home/${user}/.* && \
 # clean up
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* /tmp/*
