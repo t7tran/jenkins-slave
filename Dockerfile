@@ -15,7 +15,7 @@ ARG user=jenkins
 ARG group=jenkins
 ARG uid=10000
 ARG gid=10000
-ARG VERSION=3.23
+ARG VERSION=3.26
 ARG AGENT_WORKDIR=/home/${user}/agent
 
 ENV HOME=/home/${user} \
