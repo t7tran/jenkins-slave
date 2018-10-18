@@ -1,5 +1,5 @@
-FROM jenkins/slave:3.23-1 AS slave
-FROM jenkins/jnlp-slave:3.23-1 AS jnlp
+FROM jenkins/slave:3.26-1 AS slave
+FROM jenkins/jnlp-slave:3.26-1 AS jnlp
 FROM ubuntu:18.04
 
 ENV TZ=Australia/Melbourne \
