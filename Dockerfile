@@ -1,5 +1,5 @@
-FROM jenkins/slave:3.26-1 AS slave
-FROM jenkins/jnlp-slave:3.26-1 AS jnlp
+FROM jenkins/slave:3.27-1 AS slave
+FROM jenkins/jnlp-slave:3.27-1 AS jnlp
 FROM ubuntu:18.04
 
 ENV TZ=Australia/Melbourne \
@@ -15,7 +15,7 @@ ARG user=jenkins
 ARG group=jenkins
 ARG uid=10000
 ARG gid=10000
-ARG VERSION=3.26
+ARG VERSION=3.27
 ARG AGENT_WORKDIR=/home/${user}/agent
 
 ENV HOME=/home/${user} \
@@ -68,7 +68,7 @@ RUN groupadd -g ${gid} ${group} && \
 # always run mvn in batch mode
     sed -i 's/${CLASSWORLDS_LAUNCHER} "$@"/${CLASSWORLDS_LAUNCHER} "$@" $MAVEN_OPTIONS/g' /usr/share/maven/bin/mvn && \
 # install additional tools
-    apt-get install -y screen mc vim && \
+    apt-get install -y screen mc vim links && \
     mv /.bashrc /.inputrc /.screenrc /.vimrc /home/${user} && \
     chown -R ${user}:${group} /home/${user}/.* && \
 # clean up
