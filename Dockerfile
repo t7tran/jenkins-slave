@@ -1,5 +1,5 @@
-FROM jenkins/slave:3.27-1 AS slave
-FROM jenkins/jnlp-slave:3.27-1 AS jnlp
+FROM jenkins/slave:3.29-2 AS slave
+FROM jenkins/jnlp-slave:3.29-1 AS jnlp
 FROM ubuntu:18.04
 
 ENV TZ=Australia/Melbourne \
@@ -15,7 +15,7 @@ ARG user=jenkins
 ARG group=jenkins
 ARG uid=10000
 ARG gid=10000
-ARG VERSION=3.27
+ARG VERSION=3.29
 ARG AGENT_WORKDIR=/home/${user}/agent
 
 ENV HOME=/home/${user} \
