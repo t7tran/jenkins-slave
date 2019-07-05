@@ -1,13 +1,15 @@
 FROM jenkins/slave:3.29-2 AS slave
 FROM jenkins/jnlp-slave:3.29-1 AS jnlp
+FROM alpine/helm:2.14.0 AS helm
 FROM ubuntu:18.04
 
 ENV TZ=Australia/Melbourne \
-    JAVA_HOME=/usr/lib/jvm/java-8-oracle
+    JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
 COPY ./* /
 COPY --from=slave /usr/share/jenkins/slave.jar /usr/share/jenkins/
 COPY --from=jnlp /usr/local/bin/jenkins-slave /usr/local/bin/jenkins-slave
+COPY --from=helm /usr/bin/helm /usr/local/bin/helm
 
 # replicate logics from slave image
 
