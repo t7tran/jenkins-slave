@@ -31,14 +31,8 @@ RUN groupadd -g ${gid} ${group} && \
     chmod 644 /usr/share/jenkins/slave.jar && \
 # additional setup
     apt-get update && apt-get upgrade -y && apt-get install -y gnupg && \
-# install oracle jdk8
-    echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee /etc/apt/sources.list.d/webupd8team-java.list && \
-    echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" | tee -a /etc/apt/sources.list.d/webupd8team-java.list && \
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys EEA14886 && \
-    apt-get update -y && \
-    echo debconf shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
-    echo debconf shared/accepted-oracle-license-v1-1 seen true | debconf-set-selections && \
-    echo -e 'y\ny' | apt-get install -y oracle-java8-installer && \
+# install openjdk-8
+    apt install -y openjdk-8-jdk && \
 # install maven and timezone data
     DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata maven && \
 # install docker
