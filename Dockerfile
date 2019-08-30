@@ -71,7 +71,7 @@ RUN groupadd -g ${gid} ${group} && \
 # always run mvn in batch mode
     sed -i 's/${CLASSWORLDS_LAUNCHER} "$@"/${CLASSWORLDS_LAUNCHER} "$@" $MAVEN_OPTIONS/g' /usr/share/maven/bin/mvn && \
 # install additional tools
-    apt-get install -y screen mc vim links && \
+    apt-get install -y screen mc vim links zip php && \
     mv /.bashrc /.inputrc /.screenrc /.vimrc /home/${user} && \
     chown -R ${user}:${group} /home/${user}/.* && \
 # clean up
