@@ -3,6 +3,8 @@ set -e
 
 cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
+mv /home/source/* /home/jenkins/
+
 if [[ -f "$INIT_SCRIPT" ]]; then
 	cp $INIT_SCRIPT /tmp/init.sh
 	chmod +x /tmp/init.sh
