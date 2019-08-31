@@ -71,7 +71,7 @@ RUN groupadd -g ${gid} ${group} && \
 # always run mvn in batch mode
     sed -i 's/${CLASSWORLDS_LAUNCHER} "$@"/${CLASSWORLDS_LAUNCHER} "$@" $MAVEN_OPTIONS/g' /usr/share/maven/bin/mvn && \
 # install additional tools
-    apt-get install -y screen mc vim links zip php && \
+    apt-get install -y screen mc vim links zip php nodejs npm && \
 # clean up
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* /tmp/*
