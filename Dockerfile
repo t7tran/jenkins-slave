@@ -6,7 +6,7 @@ FROM ubuntu:18.04
 ENV TZ=Australia/Melbourne \
     JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 
-COPY --chmod=10000:10000 rootfs /
+COPY --chown=10000:10000 rootfs /
 COPY --from=slave /usr/share/jenkins/slave.jar /usr/share/jenkins/
 COPY --from=jnlp /usr/local/bin/jenkins-slave /usr/local/bin/jenkins-slave
 COPY --from=helm /usr/bin/helm /usr/local/bin/helm
