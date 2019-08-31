@@ -67,7 +67,7 @@ RUN groupadd -g ${gid} ${group} && \
     chmod +x /usr/local/bin/gosu && \
     gosu nobody true && \
 # complete gosu
-    chmod u+x /entrypoint.sh && \
+    chmod +x /entrypoint.sh && \
 # always run mvn in batch mode
     sed -i 's/${CLASSWORLDS_LAUNCHER} "$@"/${CLASSWORLDS_LAUNCHER} "$@" $MAVEN_OPTIONS/g' /usr/share/maven/bin/mvn && \
 # install additional tools
