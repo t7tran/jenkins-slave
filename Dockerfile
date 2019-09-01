@@ -3,8 +3,10 @@ FROM jenkins/jnlp-slave:3.29-1 AS jnlp
 FROM alpine/helm:2.14.0 AS helm
 FROM ubuntu:18.04
 
+ENV COMPOSER_HOME /.composer
 ENV TZ=Australia/Melbourne \
-    JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+    JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \
+    PATH=$COMPOSER_HOME/vendor/bin:$PATH
 
 COPY --chown=10000:10000 rootfs /
 COPY --from=slave /usr/share/jenkins/slave.jar /usr/share/jenkins/
@@ -72,6 +74,12 @@ RUN groupadd -g ${gid} ${group} && \
     sed -i 's/${CLASSWORLDS_LAUNCHER} "$@"/${CLASSWORLDS_LAUNCHER} "$@" $MAVEN_OPTIONS/g' /usr/share/maven/bin/mvn && \
 # install additional tools
     apt-get install -y screen mc vim links zip php nodejs npm && \
+# install composer
+    mkdir -p $COMPOSER_HOME/cache && \
+    chmod 777 $COMPOSER_HOME/cache && \
+    mkdir -p $COMPOSER_HOME/vendor/bin && \
+    curl -sSL https://getcomposer.org/installer | \ 
+    php -- --install-dir=$COMPOSER_HOME/vendor/bin --filename=composer && \
 # clean up
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* /tmp/*
