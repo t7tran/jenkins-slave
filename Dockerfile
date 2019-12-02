@@ -1,6 +1,6 @@
-FROM jenkins/slave:3.29-2 AS slave
-FROM jenkins/jnlp-slave:3.29-1 AS jnlp
-FROM alpine/helm:2.14.0 AS helm
+FROM jenkins/slave:3.35-3 AS slave
+FROM jenkins/jnlp-slave:3.35-5 AS jnlp
+FROM alpine/helm:2.16.1 AS helm
 FROM ubuntu:18.04
 
 ENV COMPOSER_HOME /.composer
