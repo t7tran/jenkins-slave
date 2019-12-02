@@ -1,4 +1,3 @@
-FROM jenkins/slave:3.35-3 AS slave
 FROM jenkins/jnlp-slave:3.35-5 AS jnlp
 FROM alpine/helm:2.16.1 AS helm
 FROM ubuntu:18.04
@@ -8,18 +7,18 @@ ENV TZ=Australia/Melbourne \
     JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \
     PATH=$COMPOSER_HOME/vendor/bin:$PATH
 
-COPY --chown=10000:10000 rootfs /
-COPY --from=slave /usr/share/jenkins/slave.jar /usr/share/jenkins/
-COPY --from=jnlp /usr/local/bin/jenkins-slave /usr/local/bin/jenkins-slave
+COPY --chown=1000:1000 rootfs /
+COPY --from=jnlp /usr/share/jenkins/agent.jar /usr/share/jenkins/
+COPY --from=jnlp /usr/local/bin/jenkins-agent /usr/local/bin/jenkins-agent
 COPY --from=helm /usr/bin/helm /usr/local/bin/helm
 
 # replicate logics from slave image
 
+ARG VERSION=3.35
 ARG user=jenkins
 ARG group=jenkins
-ARG uid=10000
-ARG gid=10000
-ARG VERSION=3.29
+ARG uid=1000
+ARG gid=1000
 ARG AGENT_WORKDIR=/home/${user}/agent
 
 ENV HOME=/home/${user} \
@@ -30,7 +29,9 @@ RUN groupadd -g ${gid} ${group} && \
     mkdir /home/${user}/.jenkins && mkdir -p ${AGENT_WORKDIR} && \
     chown -R ${user}:${group} /home/${user}/ && \
     chmod 755 /usr/share/jenkins && \
-    chmod 644 /usr/share/jenkins/slave.jar && \
+    chmod 644 /usr/share/jenkins/agent.jar && \
+    ln -sf /usr/share/jenkins/agent.jar /usr/share/jenkins/slave.jar && \
+    ln -s /usr/local/bin/jenkins-agent /usr/local/bin/jenkins-slave && \
 # additional setup
     apt-get update && apt-get upgrade -y && apt-get install -y gnupg && \
 # install openjdk-8
@@ -91,4 +92,4 @@ WORKDIR /home/${user}
 # end replication
 
 ENTRYPOINT ["/entrypoint.sh"]
-#ENTRYPOINT ["gosu", "jenkins", "jenkins-slave"]
+#ENTRYPOINT ["gosu", "jenkins", "jenkins-agent"]

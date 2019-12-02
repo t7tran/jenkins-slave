@@ -14,4 +14,4 @@ if [[ -f "$INIT_SCRIPT" ]]; then
 	rm -rf /tmp/init.sh
 fi
 
-exec gosu jenkins jenkins-slave $@
+exec gosu jenkins jenkins-agent $@
