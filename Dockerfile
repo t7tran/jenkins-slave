@@ -45,6 +45,7 @@ RUN groupadd -g ${gid} ${group} && \
         rm -rf /tmp/maven.tar.gz /usr/bin/mvn /usr/bin/mvn-$v; \
         ln -s /opt/apache-maven-$v/bin/mvn /usr/bin/mvn; \
         ln -s /opt/apache-maven-$v/bin/mvn /usr/bin/mvn-$v; \
+	    sed -i 's/${CLASSWORLDS_LAUNCHER} "$@"/${CLASSWORLDS_LAUNCHER} "$@" $MAVEN_OPTIONS/g' /opt/apache-maven-$v/bin/mvn; \
     done && \
 # install docker
     apt install -y apt-transport-https ca-certificates software-properties-common && \
@@ -79,8 +80,6 @@ RUN groupadd -g ${gid} ${group} && \
     gosu nobody true && \
 # complete gosu
     chmod +x /entrypoint.sh && \
-# always run mvn in batch mode
-    sed -i 's/${CLASSWORLDS_LAUNCHER} "$@"/${CLASSWORLDS_LAUNCHER} "$@" $MAVEN_OPTIONS/g' /usr/share/maven/bin/mvn && \
 # install additional tools
     apt-get install -y tmux screen mc vim links zip php nodejs npm && \
 # install composer
