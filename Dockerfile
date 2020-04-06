@@ -36,10 +36,18 @@ RUN groupadd -g ${gid} ${group} && \
     apt-get update && apt-get upgrade -y && apt-get install -y gnupg && \
 # install openjdk-8
     apt install -y openjdk-8-jdk && \
-# install maven and timezone data
-    DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata maven && \
+# install timezone data
+    DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata curl && \
+# install multiple maven versions
+    for v in 3.6.0 3.6.3; do \
+        curl -fsLo /tmp/maven.tar.gz https://archive.apache.org/dist/maven/maven-3/$v/binaries/apache-maven-$v-bin.tar.gz; \
+        tar xf /tmp/maven.tar.gz -C /opt; \
+        rm -rf /tmp/maven.tar.gz /usr/bin/mvn /usr/bin/mvn-$v; \
+        ln -s /opt/apache-maven-$v/bin/mvn /usr/bin/mvn; \
+        ln -s /opt/apache-maven-$v/bin/mvn /usr/bin/mvn-$v; \
+    done && \
 # install docker
-    apt install -y apt-transport-https ca-certificates curl software-properties-common && \
+    apt install -y apt-transport-https ca-certificates software-properties-common && \
     curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
     apt-key fingerprint 0EBFCD88 && \
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && \
