@@ -1,4 +1,4 @@
-FROM jenkins/jnlp-slave:3.40-1 AS jnlp
+FROM jenkins/inbound-agent:4.3-4 AS jnlp
 FROM alpine/helm:2.16.1 AS helm
 FROM ubuntu:18.04
 
@@ -14,7 +14,7 @@ COPY --from=helm /usr/bin/helm /usr/local/bin/helm
 
 # replicate logics from slave image
 
-ARG VERSION=4.0.1
+ARG VERSION=4.3
 ARG user=jenkins
 ARG group=jenkins
 ARG uid=1000
