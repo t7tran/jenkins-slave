@@ -1,5 +1,5 @@
 FROM jenkins/inbound-agent:4.3-4 AS jnlp
-FROM alpine/helm:2.16.1 AS helm
+FROM alpine/helm:2.16.7 AS helm
 FROM ubuntu:18.04
 
 ENV COMPOSER_HOME /.composer
