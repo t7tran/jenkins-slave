@@ -75,7 +75,7 @@ RUN groupadd -g ${gid} ${group} && \
     apt install /tmp/libjasper1.deb /tmp/libjasper-dev.deb && \
 # install gosu
     dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" && \
-    curl -fsLo /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/1.11/gosu-$dpkgArch" && \
+    curl -fsLo /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/1.12/gosu-$dpkgArch" && \
     chmod +x /usr/local/bin/gosu && \
     gosu nobody true && \
 # complete gosu
