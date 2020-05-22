@@ -80,8 +80,9 @@ RUN groupadd -g ${gid} ${group} && \
     gosu nobody true && \
 # complete gosu
     chmod +x /entrypoint.sh && \
-# install the latest nodejs
-    apt-get install -y nodejs npm  && \
+# install the nodejs 6.x
+    curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
+    apt-get install -y nodejs=6.14.1-1nodesource1 && \
 # install additional tools
     apt-get install -y tmux screen mc vim links zip php  && \
 # install composer
