@@ -3,7 +3,7 @@ FROM alpine/helm:2.16.7 AS helm
 FROM ubuntu:18.04
 
 ENV COMPOSER_HOME=/.composer \
-    DOCKER_VERSION=18.03.1~ce~3-0~ubuntu \
+    DOCKER_VERSION=5:19.03.9~3-0~ubuntu-bionic \
     DOCKER_COMPOSE_VERSION=1.25.5 \
     MAVEN_VERSIONS='3.6.0 3.6.3' \
     TERRAFORM_VERSION=0.12.25 \
