@@ -2,7 +2,12 @@ FROM jenkins/inbound-agent:4.3-4 AS jnlp
 FROM alpine/helm:2.16.7 AS helm
 FROM ubuntu:18.04
 
-ENV COMPOSER_HOME /.composer
+ENV COMPOSER_HOME=/.composer \
+    DOCKER_VERSION=18.03.1~ce~3-0~ubuntu \
+    DOCKER_COMPOSE_VERSION=1.25.5 \
+    MAVEN_VERSIONS='3.6.0 3.6.3' \
+    TERRAFORM_VERSION=0.12.25 \
+    GOSU_VERSION=1.12
 ENV TZ=Australia/Melbourne \
     JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \
     PATH=$COMPOSER_HOME/vendor/bin:$PATH
@@ -39,7 +44,7 @@ RUN groupadd -g ${gid} ${group} && \
 # install timezone data
     DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata curl && \
 # install multiple maven versions
-    for v in 3.6.0 3.6.3; do \
+    for v in $MAVEN_VERSIONS; do \
         curl -fsLo /tmp/maven.tar.gz https://archive.apache.org/dist/maven/maven-3/$v/binaries/apache-maven-$v-bin.tar.gz; \
         tar xf /tmp/maven.tar.gz -C /opt; \
         rm -rf /tmp/maven.tar.gz /usr/bin/mvn /usr/bin/mvn-$v; \
@@ -52,14 +57,17 @@ RUN groupadd -g ${gid} ${group} && \
     curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add - && \
     apt-key fingerprint 0EBFCD88 && \
     add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && \
-    apt update && apt install -y docker-ce=18.03.1~ce~3-0~ubuntu && \
+    # list docker-ce versions: apt-cache madison docker-ce
+    apt update && apt install -y docker-ce=${DOCKER_VERSION} && \
 # install docker-compose
-    curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
+    curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && \
     chmod +x /usr/local/bin/docker-compose && \
+# install gcloud SDK
+    echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && \
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add - && \
+    apt update && apt install -y google-cloud-sdk && \
 # install kubectl
-    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add - && \
-    echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list && \
-    apt update && apt install -y kubectl && \
+    apt install -y kubectl && \
 # maven site doesn't work without the fonts
     echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | debconf-set-selections && \
     echo -e '\n\n' | apt install -y libmspack0 libxfont2 xfonts-encodings cabextract xfonts-utils fontconfig msttcorefonts && \
@@ -75,7 +83,7 @@ RUN groupadd -g ${gid} ${group} && \
     apt install /tmp/libjasper1.deb /tmp/libjasper-dev.deb && \
 # install gosu
     dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" && \
-    curl -fsLo /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/1.12/gosu-$dpkgArch" && \
+    curl -fsLo /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/${GOSU_VERSION}/gosu-$dpkgArch" && \
     chmod +x /usr/local/bin/gosu && \
     gosu nobody true && \
 # complete gosu
@@ -91,6 +99,10 @@ RUN groupadd -g ${gid} ${group} && \
     mkdir -p $COMPOSER_HOME/vendor/bin && \
     curl -sSL https://getcomposer.org/installer | \ 
     php -- --install-dir=$COMPOSER_HOME/vendor/bin --filename=composer && \
+# install terraform
+    curl -fsSLo /tmp/terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip; unzip /tmp/terraform.zip -d /usr/local/bin/ && \
+# install mysql-client
+    apt install -y mysql-client && \
 # clean up
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* /tmp/*
