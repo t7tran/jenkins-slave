@@ -1,9 +1,9 @@
 FROM jenkins/inbound-agent:4.3-4 AS jnlp
 FROM alpine/helm:2.16.7 AS helm
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 ENV COMPOSER_HOME=/.composer \
-    DOCKER_VERSION=5:19.03.9~3-0~ubuntu-bionic \
+    DOCKER_VERSION=5:19.03.12~3-0~ubuntu-focal \
     DOCKER_COMPOSE_VERSION=1.25.5 \
     MAVEN_VERSIONS='3.6.0 3.6.3' \
     TERRAFORM_VERSION=0.12.25 \

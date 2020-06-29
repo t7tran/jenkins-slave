@@ -1,13 +1,14 @@
 FROM jenkins/inbound-agent:4.3-4 AS jnlp
 FROM alpine/helm:2.16.7 AS helm
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 ENV COMPOSER_HOME=/.composer \
-    DOCKER_VERSION=5:19.03.9~3-0~ubuntu-bionic \
+    DOCKER_VERSION=5:19.03.12~3-0~ubuntu-focal \
     DOCKER_COMPOSE_VERSION=1.25.5 \
     MAVEN_VERSIONS='3.6.0 3.6.3' \
     TERRAFORM_VERSION=0.12.25 \
-    GOSU_VERSION=1.12
+    GOSU_VERSION=1.12 \
+    NODE6_VERSION=v6.17.1
 ENV TZ=Australia/Melbourne \
     JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \
     PATH=$COMPOSER_HOME/vendor/bin:$PATH
@@ -89,8 +90,11 @@ RUN groupadd -g ${gid} ${group} && \
 # complete gosu
     chmod +x /entrypoint.sh && \
 # install the nodejs 6.x
-    curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
-    apt-get install -y nodejs=6.14.1-1nodesource1 && \
+	curl -fsLo /tmp/node6.tar.gz https://nodejs.org/dist/${NODE6_VERSION}/node-${NODE6_VERSION}-linux-x64.tar.gz && \
+	mkdir /usr/local/lib/node6 && \
+	tar -xzvf /tmp/node6.tar.gz -C /usr/local/lib/node6 --strip-component=1 && \
+	ln -s /usr/local/lib/node6/bin/node /usr/local/bin/node && \
+	ln -s /usr/local/lib/node6/bin/npm /usr/local/bin/npm && \
 # install additional tools
     apt-get install -y tmux screen mc vim links zip php  && \
 # install composer
