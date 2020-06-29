@@ -97,7 +97,7 @@ RUN groupadd -g ${gid} ${group} && \
 	ln -s /usr/local/lib/node6/bin/npm /usr/local/bin/npm && \
     npm install -g nexus-npm && \
     for c in `ls -1 /usr/local/lib/node6/bin/`; do \
-      [[ -x /usr/local/lib/node6/bin/$c && ! -f /usr/local/bin/$c ]] && \
+      [ -x /usr/local/lib/node6/bin/$c ] && [ ! -f /usr/local/bin/$c ] && \
       ln -s /usr/local/lib/node6/bin/$c /usr/local/bin/$c; \
     done && \
 # install additional tools
