@@ -95,6 +95,11 @@ RUN groupadd -g ${gid} ${group} && \
 	tar -xzvf /tmp/node6.tar.gz -C /usr/local/lib/node6 --strip-component=1 && \
 	ln -s /usr/local/lib/node6/bin/node /usr/local/bin/node && \
 	ln -s /usr/local/lib/node6/bin/npm /usr/local/bin/npm && \
+    npm install -g nexus-npm && \
+    for c in `ls -1 /usr/local/lib/node6/bin/`; do \
+      [[ -x /usr/local/lib/node6/bin/$c && ! -f /usr/local/bin/$c ]] && \
+      ln -s /usr/local/lib/node6/bin/$c /usr/local/bin/$c; \
+    done && \
 # install additional tools
     apt-get install -y tmux screen mc vim links zip php  && \
 # install composer

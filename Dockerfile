@@ -89,7 +89,8 @@ RUN groupadd -g ${gid} ${group} && \
 # complete gosu
     chmod +x /entrypoint.sh && \
 # install the latest nodejs
-    apt-get install -y nodejs npm  && \
+    apt-get install -y nodejs npm && \
+    npm install -g nexus-npm && \
 # install additional tools
     apt-get install -y tmux screen mc vim links zip php  && \
 # install composer
