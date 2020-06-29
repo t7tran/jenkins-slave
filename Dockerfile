@@ -1,3 +1,17 @@
+FROM ubuntu:20.04 as node6
+
+ENV NODE6_VERSION=v6.17.1
+
+RUN apt update && \
+    apt install -y curl && \
+# install nodejs 6.x
+	curl -fsLo /tmp/node6.tar.gz https://nodejs.org/dist/${NODE6_VERSION}/node-${NODE6_VERSION}-linux-x64.tar.gz && \
+	mkdir /usr/local/lib/node6 && \
+	tar -xzvf /tmp/node6.tar.gz -C /usr/local/lib/node6 --strip-component=1 && \
+	ln -s /usr/local/lib/node6/bin/node /usr/local/bin/node && \
+	ln -s /usr/local/lib/node6/bin/npm /usr/local/bin/npm && \
+    npm install -g nexus-npm
+
 FROM jenkins/inbound-agent:4.3-4 AS jnlp
 FROM alpine/helm:2.16.7 AS helm
 FROM ubuntu:20.04
@@ -16,6 +30,7 @@ COPY --chown=1000:1000 rootfs /
 COPY --from=jnlp /usr/share/jenkins/agent.jar /usr/share/jenkins/
 COPY --from=jnlp /usr/local/bin/jenkins-agent /usr/local/bin/jenkins-agent
 COPY --from=helm /usr/bin/helm /usr/local/bin/helm
+COPY --from=node6 /usr/local/lib/node6 /usr/local/lib/node6/
 
 # replicate logics from slave image
 
@@ -41,6 +56,8 @@ RUN groupadd -g ${gid} ${group} && \
     apt-get update && apt-get upgrade -y && apt-get install -y gnupg && \
 # install openjdk-8
     apt install -y openjdk-8-jdk && \
+echo done
+RUN echo next && \
 # install timezone data
     DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata curl && \
 # install multiple maven versions
