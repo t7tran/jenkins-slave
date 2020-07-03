@@ -127,6 +127,7 @@ RUN echo next && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys AA8E81B4331F7F50 && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 112695A0E562B32A && \
+    apt update && \
     apt install --no-install-recommends -y chromium fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf && \
     ln -s /usr/bin/chromium /usr/bin/chromium-browser && \
 # clean up
