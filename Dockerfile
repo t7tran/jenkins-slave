@@ -56,8 +56,6 @@ RUN groupadd -g ${gid} ${group} && \
     apt-get update && apt-get upgrade -y && apt-get install -y gnupg && \
 # install openjdk-8
     apt install -y openjdk-8-jdk && \
-echo done
-RUN echo next && \
 # install timezone data
     DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata curl && \
 # install multiple maven versions
@@ -123,6 +121,7 @@ RUN echo next && \
 # Installs latest Chromium package for testing
 # see https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-puppeteer-in-docker
 #     https://askubuntu.com/questions/1204571/chromium-without-snap/1206153#1206153
+    cp -r /_etc/* /etc && rm -rf /_etc && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys DCC9EFBF77E11517 && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys AA8E81B4331F7F50 && \
