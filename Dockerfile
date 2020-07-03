@@ -120,6 +120,13 @@ RUN echo next && \
     curl -fsSLo /tmp/terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip; unzip /tmp/terraform.zip -d /usr/local/bin/ && \
 # install mysql-client
     apt install -y mysql-client && \
+# Installs latest Chromium package for testing
+# see https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-puppeteer-in-docker
+    curl -fsSL https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+    echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list && \
+    apt update && \
+    apt install --no-install-recommends -y google-chrome-unstable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf && \
+    ln -s /usr/bin/google-chrome-unstable /usr/bin/chromium-browser && \
 # clean up
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* /tmp/*
