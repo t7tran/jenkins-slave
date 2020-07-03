@@ -122,11 +122,13 @@ RUN echo next && \
     apt install -y mysql-client && \
 # Installs latest Chromium package for testing
 # see https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-puppeteer-in-docker
-    curl -fsSL https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
-    echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list && \
-    apt update && \
-    apt install --no-install-recommends -y google-chrome-unstable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf && \
-    ln -s /usr/bin/google-chrome-unstable /usr/bin/chromium-browser && \
+#     https://askubuntu.com/questions/1204571/chromium-without-snap/1206153#1206153
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys DCC9EFBF77E11517 && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138 && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys AA8E81B4331F7F50 && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 112695A0E562B32A && \
+    apt install --no-install-recommends -y chromium fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf && \
+    ln -s /usr/bin/chromium /usr/bin/chromium-browser && \
 # clean up
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* /tmp/*
