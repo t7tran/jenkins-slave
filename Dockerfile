@@ -107,7 +107,7 @@ RUN groupadd -g ${gid} ${group} && \
     apt-get install -y nodejs npm && \
     npm install -g nexus-npm && \
 # install additional tools
-    apt-get install -y tmux screen mc vim links zip php  && \
+    apt-get install -y tmux screen mc vim links zip php wget && \
 # install composer
     mkdir -p $COMPOSER_HOME/cache && \
     chmod 777 $COMPOSER_HOME/cache && \
