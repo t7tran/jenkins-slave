@@ -12,15 +12,15 @@ RUN apt update && \
 	ln -s /usr/local/lib/node6/bin/npm /usr/local/bin/npm && \
     npm install -g nexus-npm
 
-FROM jenkins/inbound-agent:4.3-4 AS jnlp
-FROM alpine/helm:2.16.7 AS helm
+FROM jenkins/inbound-agent:4.3-7 AS jnlp
+FROM alpine/helm:2.16.9 AS helm
 FROM ubuntu:20.04
 
 ENV COMPOSER_HOME=/.composer \
     DOCKER_VERSION=5:19.03.12~3-0~ubuntu-focal \
-    DOCKER_COMPOSE_VERSION=1.25.5 \
+    DOCKER_COMPOSE_VERSION=1.26.2 \
     MAVEN_VERSIONS='3.6.0 3.6.3' \
-    TERRAFORM_VERSION=0.12.28 \
+    TERRAFORM_VERSION=0.13.0 \
     GOSU_VERSION=1.12
 ENV TZ=Australia/Melbourne \
     JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \
