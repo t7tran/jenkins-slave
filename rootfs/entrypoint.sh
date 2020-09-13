@@ -20,6 +20,10 @@ set -e
 
 cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
+if [[ -f "$SERVICE_ACCOUNT_JSON" ]]; then
+	gcloud auth activate-service-account --key-file=$SERVICE_ACCOUNT_JSON &> /dev/null
+fi
+
 if [[ -f "$INIT_SCRIPT" ]]; then
 	cp $INIT_SCRIPT /tmp/init.sh
 	chmod +x /tmp/init.sh
