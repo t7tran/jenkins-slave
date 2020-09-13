@@ -1,0 +1,16 @@
+#!/bin/bash
+
+[[ -n "$ZONE" ]] && ZONE="--zone $ZONE"
+[[ -n "$REGION" ]] && REGION="--region $REGION"
+
+for pool in ${POOL_NAMES?required}; do
+    gcloud container clusters resize ${CLUSTER_NAME?required} \
+      --node-pool $pool \
+      --num-nodes ${1:-1} \
+      --project ${PROJECT_ID?required} \
+      $ZONE $REGION \
+      --quiet
+done
+
+date +%s > /tmp/last.scaleup
+gsutil cp /tmp/last.scaleup gs://$BUCKET_NAME/

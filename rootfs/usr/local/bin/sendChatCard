@@ -1,0 +1,77 @@
+#!/bin/bash
+
+[[ -z "$CHAT_WEBHOOK_URL" ]] && echo CHAT_WEBHOOK_URL undefined && exit 1
+[[ -z "$1" ]] && echo 'Syntax: sendChatCard "message" [buttonLabel buttonLink]...' && exit 1
+
+# https://developers.google.com/hangouts/chat/reference/message-formats/cards
+
+button() {
+[[ -z $1 || -z $2 ]] && return
+cat <<BUTTON
+${3}{
+    "textButton": {
+        "text": "$1",
+        "onClick": {
+            "openLink": {
+                "url": "$2"
+            }
+        }
+    }
+}
+BUTTON
+}
+
+if [[ -z "$MESSAGE_CARD_HEADER" ]]; then
+	MESSAGE_CARD_HEADER=${JOB_BASE_NAME:-Header}
+fi
+if [[ -z "$MESSAGE_CARD_SUBTITLE" ]]; then
+	MESSAGE_CARD_SUBTITLE="Build #${BUILD_NUMBER}"
+fi
+THREADKEY=$(echo -n ${BUILD_TAG:-`date +'%Y%m%d%H'`} | sha256sum | cut -d' ' -f1)
+RUN_DISPLAY_URL=${RUN_DISPLAY_URL:-https://jenkins.service.genixventures.com}
+MSG=$1
+shift
+
+buttons=`button "View Details" "${RUN_DISPLAY_URL:-https://jenkins.service.genixventures.com}"`
+while [[ -n "$1" || -n "$2" ]]; do
+	buttons=$buttons`button "$1" "$2" ,`
+	shift
+	shift
+done
+
+output=`mktemp`
+code=$(curl -s -o $output -w "%{http_code}" -X POST -H 'Content-Type: application/json' "$CHAT_WEBHOOK_URL&threadKey=$THREADKEY" -d @- <<EOF
+{
+    "cards": [
+        {
+            "header": {
+                "title": "${MESSAGE_CARD_HEADER//\"/\\\"}",
+                "subtitle": "${MESSAGE_CARD_SUBTITLE//\"/\\\"}",
+                "imageUrl": "https://lh3.googleusercontent.com/proxy/fI_xSzgrxu6Ckw7OSHbutybNupGcnX2tyqnoVG3qZSmDDQcPDJ2YvVwuj5ZM3wi7hzb-CArqASXsre6Mdiv9GsndmYi7CuWeAQdko5VhjreSlxBVqW5qur6F9Q=s88-c-k-no-mo"
+            },
+            "sections": [
+                {
+                    "widgets": [
+                        {
+                            "textParagraph": {
+                                "text": "${MSG//\"/\\\"}"
+                            }
+                        },
+                        {
+                            "buttons": [${buttons}]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+EOF
+)
+
+if [[ $code -ge 400 ]]; then
+	cat $output
+	exit 1
+else
+	rm -rf $output
+fi
