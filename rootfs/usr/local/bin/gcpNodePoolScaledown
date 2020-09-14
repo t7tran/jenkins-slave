@@ -3,6 +3,8 @@
 [[ -n "$ZONE" ]] && ZONE="--zone $ZONE"
 [[ -n "$REGION" ]] && REGION="--region $REGION"
 
+gcsSetStatus stopping
+
 for pool in ${POOL_NAMES?required}; do
     gcloud container clusters resize ${CLUSTER_NAME?required} \
       --node-pool $pool \
@@ -14,3 +16,5 @@ for pool in ${POOL_NAMES?required}; do
 done
 
 gsutil rm gs://${BUCKET_NAME?required}/scaledown 2>/dev/null
+
+gcsSetStatus stopped

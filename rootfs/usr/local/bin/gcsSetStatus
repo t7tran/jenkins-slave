@@ -1,0 +1,8 @@
+#!/bin/bash
+
+[[ ! -f /usr/share/images/$1.png ]] && echo "Unknown status '${1:-unspecified}'." && exit 1
+
+for t in png svg; do
+    cp /usr/share/images/$1.$t /tmp/status.$t
+    gsutil cp /tmp/status.$t gs://${BUCKET_NAME?required}/
+done

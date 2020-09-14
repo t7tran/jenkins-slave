@@ -3,6 +3,8 @@
 [[ -n "$ZONE" ]] && ZONE="--zone $ZONE"
 [[ -n "$REGION" ]] && REGION="--region $REGION"
 
+gcsSetStatus starting
+
 gsutil rm gs://${BUCKET_NAME?required}/scaledown 2>/dev/null
 
 for pool in ${POOL_NAMES?required}; do
@@ -16,3 +18,5 @@ done
 
 date +%s > /tmp/last.scaleup
 gsutil cp /tmp/last.scaleup gs://$BUCKET_NAME/
+
+gcsSetStatus running
