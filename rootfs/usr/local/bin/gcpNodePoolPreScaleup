@@ -13,6 +13,7 @@ for pool in ${POOL_NAMES?required}; do
 		echo "scaleup"
 	else
 		echo "nothing"
+		gsutil rm gs://${BUCKET_NAME?required}/scaledown 2>/dev/null
 		date +%s > /tmp/last.scaleup
 		gsutil cp /tmp/last.scaleup gs://$BUCKET_NAME/
 	fi
