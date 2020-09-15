@@ -3,6 +3,10 @@
 [[ ! -f /usr/share/images/$1.png ]] && echo "Unknown status '${1:-unspecified}'." && exit 1
 
 for t in png svg; do
-    cp /usr/share/images/$1.$t /tmp/status.$t
-    gsutil cp /tmp/status.$t gs://${BUCKET_NAME?required}/
+    if gsutil -q stat gs://${BUCKET_NAME?required}/$1.$t; then
+    	# cloud copy preserses source metadata, like cache-control
+        gsutil cp gs://${BUCKET_NAME?required}/$1.$t gs://${BUCKET_NAME?required}/status.$t
+    else
+        gsutil cp /usr/share/images/$1.$t gs://${BUCKET_NAME?required}/status.$t
+    fi
 done
