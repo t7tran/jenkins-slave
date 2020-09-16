@@ -1,6 +1,24 @@
 #!/bin/bash
 
-[[ -z "$CHAT_WEBHOOK_URL" ]] && echo CHAT_WEBHOOK_URL undefined && exit 1
+hook_url() {
+    if [[ $1 -le 0 ]]; then
+        echo $CHAT_WEBHOOK_URL
+    else
+        var="CHAT_WEBHOOK_URL_$1"
+        echo ${!var}
+    fi
+}
+
+# at least one valid variable defined
+urls=
+for i in {0..9}; do
+    url=`hook_url $i`
+    [[ -z "$url" ]] && continue
+    [[ "$url" != 'https://'* ]] && echo Invalid CHAT_WEBHOOK_URL set && exit 1
+    urls="${urls}${url}"
+done
+
+[[ -z "$urls" ]] && echo CHAT_WEBHOOK_URL undefined && exit 1
 [[ -z "$1" ]] && echo 'Syntax: sendChatCard "message" [buttonLabel buttonLink]...' && exit 1
 
 # https://developers.google.com/hangouts/chat/reference/message-formats/cards
@@ -32,6 +50,31 @@ RUN_DISPLAY_URL=${RUN_DISPLAY_URL:-https://jenkins.service.genixventures.com}
 MSG=$1
 shift
 
+header_text() {
+    if [[ $1 -le 0 ]]; then
+        echo $MESSAGE_CARD_HEADER
+    else
+        var="MESSAGE_CARD_HEADER_$1"
+        if [[ -n ${!var} ]]; then
+            echo ${!var}
+        else
+            echo $MESSAGE_CARD_HEADER
+        fi
+    fi
+}
+subtitle_text() {
+    if [[ $1 -le 0 ]]; then
+        echo $MESSAGE_CARD_SUBTITLE
+    else
+        var="MESSAGE_CARD_SUBTITLE_$1"
+        if [[ -n ${!var} ]]; then
+            echo ${!var}
+        else
+            echo $MESSAGE_CARD_SUBTITLE
+        fi
+    fi
+}
+
 buttons=`button "View Details" "${RUN_DISPLAY_URL:-https://jenkins.service.genixventures.com}"`
 while [[ -n "$1" || -n "$2" ]]; do
 	buttons=$buttons`button "$1" "$2" ,`
@@ -39,14 +82,28 @@ while [[ -n "$1" || -n "$2" ]]; do
 	shift
 done
 
+for i in {0..9}; do
+# for loop begins
+url=`hook_url $i`
+[[ -z "$url" ]] && continue
+header=`header_text $i`
+subtitle=`subtitle_text $i`
+
+if [[ -n "$DEBUG_MODE" ]]; then
+    echo $header
+    echo $subtitle
+    echo $url
+    continue
+fi
+
 output=`mktemp`
-code=$(curl -s -o $output -w "%{http_code}" -X POST -H 'Content-Type: application/json' "$CHAT_WEBHOOK_URL&threadKey=$THREADKEY" -d @- <<EOF
+code=$(curl -s -o $output -w "%{http_code}" -X POST -H 'Content-Type: application/json' "$url&threadKey=$THREADKEY" -d @- <<EOF
 {
     "cards": [
         {
             "header": {
-                "title": "${MESSAGE_CARD_HEADER//\"/\\\"}",
-                "subtitle": "${MESSAGE_CARD_SUBTITLE//\"/\\\"}",
+                "title": "${header//\"/\\\"}",
+                "subtitle": "${subtitle//\"/\\\"}",
                 "imageUrl": "https://lh3.googleusercontent.com/proxy/fI_xSzgrxu6Ckw7OSHbutybNupGcnX2tyqnoVG3qZSmDDQcPDJ2YvVwuj5ZM3wi7hzb-CArqASXsre6Mdiv9GsndmYi7CuWeAQdko5VhjreSlxBVqW5qur6F9Q=s88-c-k-no-mo"
             },
             "sections": [
@@ -75,3 +132,6 @@ if [[ $code -ge 400 ]]; then
 else
 	rm -rf $output
 fi
+
+# for loop ends
+done
