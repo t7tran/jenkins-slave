@@ -20,9 +20,10 @@ for pool in ${POOL_NAMES?required}; do
 		  $ZONE $REGION \
 		  --format "value(initialNodeCount)" 2>/dev/null`
 	if [[ $? -eq 0 && ${size:-0} -gt 0 && $((`date +%s` - ${last:-0})) -gt ${UPTIME_SECS?required} ]]; then
+		echo "next"
 		date +%s > /tmp/scaledown
 		gsutil cp /tmp/scaledown gs://${BUCKET_NAME?required}/
-		echo "next"
+		gcsSetStatus stopping
 	else
 		echo "nothing"
 	fi
