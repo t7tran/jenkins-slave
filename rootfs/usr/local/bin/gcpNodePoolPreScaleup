@@ -10,13 +10,25 @@ for pool in ${POOL_NAMES?required}; do
 		  $ZONE $REGION \
 		  --format "value(initialNodeCount)"`
 	if [[ ${size:-0} -eq 0 ]]; then
-		echo "scaleup"
-	else
-		echo "nothing"
-		gsutil rm gs://${BUCKET_NAME?required}/scaledown 2>/dev/null
-		date +%s > /tmp/last.scaleup
-		gsutil cp /tmp/last.scaleup gs://$BUCKET_NAME/
-		gcsSetStatus running
+		action=scaleup
 	fi
 	break # only check the first pool
 done
+
+if [[ -z "$action" ]]; then
+	for name in ${DB_NAMES}; do
+		if [[ `sqlState $name` == "NEVER" ]]; then
+			action=scaleup
+			break;
+		fi
+	done
+fi
+
+echo ${action:-nothing}
+
+if [[ -z "$action" ]]; then
+	gsutil rm gs://${BUCKET_NAME?required}/scaledown 2>/dev/null
+	date +%s > /tmp/last.scaleup
+	gsutil cp /tmp/last.scaleup gs://$BUCKET_NAME/
+	gcsSetStatus running
+fi

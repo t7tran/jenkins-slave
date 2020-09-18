@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -e
+gcloud sql instances describe ${1?db name required} \
+  --project ${PROJECT_ID?required} \
+  --format "value(settings.activationPolicy)"

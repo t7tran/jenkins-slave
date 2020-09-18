@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -e
+
+DB=${1?db name required}
+FROM=${2?from state required}
+TO=${3?to state required}
+
+proj=${PROJECT_ID?required}
+status=`sqlState $DB`
+
+if [[ "$status" == "$FROM" ]]; then
+    if [[ "$status" == "$TO" ]]; then exit 0; fi
+    if [[ "$TO" == "ALWAYS" ]]; then
+        tier=`gcloud sql instances describe $DB \
+            --project ${PROJECT_ID?required} \
+            --format "value(settings.tier)"`
+        tier="--tier $tier"
+    fi
+
+    gcloud sql instances patch $DB \
+        --activation-policy=$TO \
+        --project ${PROJECT_ID?required} \
+        --quiet $tier
+fi

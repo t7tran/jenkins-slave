@@ -16,6 +16,10 @@ for pool in ${POOL_NAMES?required}; do
       --quiet
 done
 
+for name in ${DB_NAMES}; do
+    sqlSetState $name NEVER ALWAYS
+done
+
 date +%s > /tmp/last.scaleup
 gsutil cp /tmp/last.scaleup gs://$BUCKET_NAME/
 

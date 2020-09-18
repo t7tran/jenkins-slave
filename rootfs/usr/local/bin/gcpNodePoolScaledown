@@ -15,6 +15,10 @@ for pool in ${POOL_NAMES?required}; do
     [[ $? -gt 0 ]] && exit 1
 done
 
+for name in ${DB_NAMES}; do
+    sqlSetState $name ALWAYS NEVER
+done
+
 gsutil rm gs://${BUCKET_NAME?required}/scaledown 2>/dev/null
 
 gcsSetStatus stopped
