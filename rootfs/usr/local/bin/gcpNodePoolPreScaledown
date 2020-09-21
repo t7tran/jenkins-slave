@@ -12,26 +12,28 @@ fi
 
 UPTIME_SECS=$(( $UPTIME_HOURS * 3600 ))
 
-for pool in ${POOL_NAMES?required}; do
-	last=`gsutil cat gs://${BUCKET_NAME?required}/last.scaleup 2>/dev/null`
-	size=`gcloud container node-pools describe $pool \
-		  --cluster ${CLUSTER_NAME?required} \
-		  --project ${PROJECT_ID?required} \
-		  $ZONE $REGION \
-		  --format "value(initialNodeCount)" 2>/dev/null`
-	if [[ $? -eq 0 && ${size:-0} -gt 0 && $((`date +%s` - ${last:-0})) -gt ${UPTIME_SECS?required} ]]; then
-		action=next
-	fi
-	break # only check the first pool
-done
-
-if [[ -z "$action" ]]; then
-	for name in ${DB_NAMES}; do
-		if [[ `sqlState $name` == "ALWAYS" ]]; then
+last=`gsutil cat gs://${BUCKET_NAME?required}/last.scaleup 2>/dev/null`
+if [[ $((`date +%s` - ${last:-0})) -gt ${UPTIME_SECS?required} ]]; then
+	for pool in ${POOL_NAMES?required}; do
+		size=`gcloud container node-pools describe $pool \
+			--cluster ${CLUSTER_NAME?required} \
+			--project ${PROJECT_ID?required} \
+			$ZONE $REGION \
+			--format "value(initialNodeCount)" 2>/dev/null`
+		if [[ $? -eq 0 && ${size:-0} -gt 0 ]]; then
 			action=next
-			break;
 		fi
+		break # only check the first pool
 	done
+
+	if [[ -z "$action" ]]; then
+		for name in ${DB_NAMES}; do
+			if [[ `sqlState $name` == "ALWAYS" ]]; then
+				action=next
+				break;
+			fi
+		done
+	fi
 fi
 
 echo ${action:-nothing}
