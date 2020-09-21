@@ -12,6 +12,26 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
 
 
 #-------------------------------------------------------------------------
+# install additional tools -----------------------------------------------
+#-------------------------------------------------------------------------
+apt-get install -y \
+                vim \
+                tmux \
+                screen \
+                mc \
+                vim \
+                links \
+                zip \
+                php \
+                wget \
+                jq \
+                mysql-client
+apt-get install -y python3-pip
+pip3 install yq
+
+
+
+#-------------------------------------------------------------------------
 # install gosu -----------------------------------------------------------
 #-------------------------------------------------------------------------
 dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')"
@@ -84,6 +104,15 @@ chmod +x /usr/local/bin/cloud_sql_proxy
 
 
 #-------------------------------------------------------------------------
+# install aws-cli --------------------------------------------------------
+#-------------------------------------------------------------------------
+curl -fsSL https://awscli.amazonaws.com/awscli-exe-linux-x86_64-$AWSCLI_VERSION.zip -o /tmp/awscliv2.zip
+unzip /tmp/awscliv2.zip -d /tmp
+/tmp/aws/install
+
+
+
+#-------------------------------------------------------------------------
 # install kubectl --------------------------------------------------------
 #-------------------------------------------------------------------------
 apt install -y kubectl
@@ -120,26 +149,6 @@ apt install /tmp/libjasper1.deb /tmp/libjasper-dev.deb
 apt-get install -y nodejs npm
 npm install -g nexus-npm
 chown -R jenkins:jenkins /home/jenkins/{.config,.npm}
-
-
-
-#-------------------------------------------------------------------------
-# install additional tools -----------------------------------------------
-#-------------------------------------------------------------------------
-apt-get install -y \
-                vim \
-                tmux \
-                screen \
-                mc \
-                vim \
-                links \
-                zip \
-                php \
-                wget \
-                jq \
-                mysql-client
-apt-get install -y python3-pip
-pip3 install yq
 
 
 

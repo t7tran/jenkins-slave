@@ -22,6 +22,7 @@ ENV COMPOSER_HOME=/.composer \
     MAVEN_VERSIONS='3.6.0 3.6.3' \
     TERRAFORM_VERSION=0.13.2 \
     SQLPROXY_VERSION=1.17 \
+    AWSCLI_VERSION=2.0.50 \
     GOSU_VERSION=1.12
 ENV TZ=Australia/Melbourne \
     JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \
