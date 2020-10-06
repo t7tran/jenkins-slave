@@ -25,6 +25,7 @@ apt-get install -y \
                 php \
                 wget \
                 jq \
+                xmlstarlet \
                 mysql-client
 apt-get install -y python3-pip
 pip3 install yq
