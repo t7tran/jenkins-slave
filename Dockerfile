@@ -23,6 +23,7 @@ ENV COMPOSER_HOME=/.composer \
     TERRAFORM_VERSION=0.13.2 \
     SQLPROXY_VERSION=1.17 \
     AWSCLI_VERSION=2.0.50 \
+    KUBELOGIN_VERSION=0.0.6 \
     GOSU_VERSION=1.12
 ENV TZ=Australia/Melbourne \
     JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \

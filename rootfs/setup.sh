@@ -114,6 +114,15 @@ unzip /tmp/awscliv2.zip -d /tmp
 
 
 #-------------------------------------------------------------------------
+# install azure-cli ------------------------------------------------------
+#-------------------------------------------------------------------------
+curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+curl -fsSLo /tmp/kubelogin.zip https://github.com/Azure/kubelogin/releases/download/v${KUBELOGIN_VERSION}/kubelogin-linux-amd64.zip
+unzip -j /tmp/kubelogin.zip -d /usr/local/bin/
+
+
+
+#-------------------------------------------------------------------------
 # install kubectl --------------------------------------------------------
 #-------------------------------------------------------------------------
 apt install -y kubectl
@@ -166,7 +175,7 @@ apt install -y php-xml
 mkdir -p $COMPOSER_HOME/cache
 chmod 777 $COMPOSER_HOME/cache
 mkdir -p $COMPOSER_HOME/vendor/bin
-curl -sSL https://getcomposer.org/installer | php -- --install-dir=$COMPOSER_HOME/vendor/bin --filename=composer
+curl -sSL https://getcomposer.org/installer | php -- --1 --install-dir=$COMPOSER_HOME/vendor/bin --filename=composer
 
 
 
