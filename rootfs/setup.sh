@@ -156,7 +156,8 @@ apt install /tmp/libjasper1.deb /tmp/libjasper-dev.deb
 #-------------------------------------------------------------------------
 # install the latest nodejs ----------------------------------------------
 #-------------------------------------------------------------------------
-apt-get install -y nodejs npm
+curl -sL https://deb.nodesource.com/setup_14.x | bash -
+apt-get install -y nodejs
 npm install -g nexus-npm
 chown -R jenkins:jenkins /home/jenkins/{.config,.npm}
 
