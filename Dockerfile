@@ -12,18 +12,28 @@ RUN apt update && \
 	ln -s /usr/local/lib/node6/bin/npm /usr/local/bin/npm && \
     npm install -g nexus-npm
 
+# https://hub.docker.com/r/jenkins/inbound-agent/tags?ordering=last_updated&name=4.6-
 FROM jenkins/inbound-agent:4.6-1 AS jnlp
-FROM alpine/helm:2.16.9 AS helm
+# https://hub.docker.com/r/alpine/helm/tags?ordering=last_updated&name=2.17
+FROM alpine/helm:2.17.0 AS helm
 FROM ubuntu:20.04
 
 ENV COMPOSER_HOME=/.composer \
-    DOCKER_VERSION=5:19.03.13~3-0~ubuntu-focal \
-    DOCKER_COMPOSE_VERSION=1.27.4 \
+    # apt-cache madison docker-ce
+    DOCKER_VERSION=5:20.10.2~3-0~ubuntu-focal \
+    # https://github.com/docker/compose/releases
+    DOCKER_COMPOSE_VERSION=1.28.2 \
+    # https://archive.apache.org/dist/maven/maven-3
     MAVEN_VERSIONS='3.6.0 3.6.3' \
-    TERRAFORM_VERSION=0.13.5 \
-    SQLPROXY_VERSION=1.18.0 \
-    AWSCLI_VERSION=2.0.61 \
-    KUBELOGIN_VERSION=0.0.6 \
+    # https://github.com/hashicorp/terraform/releases
+    TERRAFORM_VERSION=0.14.5 \
+	# https://github.com/GoogleCloudPlatform/cloudsql-proxy/releases
+    SQLPROXY_VERSION=1.19.1 \
+    # https://github.com/aws/aws-cli/releases
+    AWSCLI_VERSION=2.1.21 \
+    # https://github.com/Azure/kubelogin/releases
+    KUBELOGIN_VERSION=0.0.7 \
+    # https://github.com/tianon/gosu/releases
     GOSU_VERSION=1.12
 ENV TZ=Australia/Melbourne \
     JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 \
@@ -39,7 +49,7 @@ COPY --from=node6 /usr/local/lib/node6 /usr/local/lib/node6/
 # https://github.com/jenkinsci/docker-inbound-agent/blob/master/8/debian/Dockerfile
 # https://github.com/jenkinsci/docker-agent/blob/master/8/buster/Dockerfile
 
-ARG VERSION=4.3
+ARG VERSION=4.6
 ARG user=jenkins
 ARG group=jenkins
 ARG uid=1000
