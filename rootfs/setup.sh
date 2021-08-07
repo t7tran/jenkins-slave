@@ -209,5 +209,6 @@ ln -s /usr/bin/chromium /usr/bin/chromium-browser
 #-------------------------------------------------------------------------
 # finishing & clean up ---------------------------------------------------
 #-------------------------------------------------------------------------
-apt-get autoremove -y
+apt clean
+apt autoremove -y
 rm -rf /var/lib/apt/lists/* /tmp/*
