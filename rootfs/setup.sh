@@ -207,6 +207,15 @@ ln -s /usr/bin/chromium /usr/bin/chromium-browser
 
 
 #-------------------------------------------------------------------------
+# Installs Salesforce CLI ------------------------------------------------
+#-------------------------------------------------------------------------
+curl -fsSL https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz -o /tmp/sfdx.tar.xz
+tar -xJf /tmp/sfdx.tar.xz -C /opt
+ln -s /opt/sfdx/bin/sfdx /usr/bin/sfdx
+
+
+
+#-------------------------------------------------------------------------
 # finishing & clean up ---------------------------------------------------
 #-------------------------------------------------------------------------
 apt clean
