@@ -33,6 +33,8 @@ ENV COMPOSER_HOME=/.composer \
     AWSCLI_VERSION=2.2.31 \
     # https://github.com/Azure/kubelogin/releases
     KUBELOGIN_VERSION=0.0.10 \
+    # https://github.com/mikefarah/yq/releases
+    YQ_VERSION=4.12.2 \
     # https://github.com/tianon/gosu/releases
     GOSU_VERSION=1.14
 ENV TZ=Australia/Melbourne \
