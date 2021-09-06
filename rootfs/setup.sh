@@ -28,7 +28,7 @@ apt-get install -y \
                 xmlstarlet \
                 mysql-client
 apt-get install -y python3-pip
-curl -fsSL https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64 -o /usr/local/bin/yq
+curl -fsSL https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION}/yq_linux_amd64 -o /usr/local/bin/yq
 chmod +x /usr/local/bin/yq
 
 
