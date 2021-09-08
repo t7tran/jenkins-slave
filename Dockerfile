@@ -12,8 +12,8 @@ RUN apt update && \
 	ln -s /usr/local/lib/node6/bin/npm /usr/local/bin/npm && \
     npm install -g nexus-npm
 
-# https://hub.docker.com/r/jenkins/inbound-agent/tags?ordering=last_updated&name=4.9-
-FROM jenkins/inbound-agent:4.9-1 AS jnlp
+# https://hub.docker.com/r/jenkins/inbound-agent/tags?ordering=last_updated&name=4.10-
+FROM jenkins/inbound-agent:4.10-2 AS jnlp
 # https://hub.docker.com/r/alpine/helm/tags?ordering=last_updated&name=2.17
 FROM alpine/helm:2.17.0 AS helm
 FROM ubuntu:20.04
@@ -51,7 +51,7 @@ COPY --from=node6 /usr/local/lib/node6 /usr/local/lib/node6/
 # https://github.com/jenkinsci/docker-inbound-agent/blob/master/8/debian/Dockerfile
 # https://github.com/jenkinsci/docker-agent/blob/master/8/buster/Dockerfile
 
-ARG VERSION=4.9
+ARG VERSION=4.10
 ARG user=jenkins
 ARG group=jenkins
 ARG uid=1000
