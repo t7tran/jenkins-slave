@@ -13,7 +13,7 @@ RUN apt update && \
     npm install -g nexus-npm
 
 # https://hub.docker.com/r/jenkins/inbound-agent/tags?ordering=last_updated&name=4.10-
-FROM jenkins/inbound-agent:4.10-2 AS jnlp
+FROM jenkins/inbound-agent:4.10-3 AS jnlp
 # https://hub.docker.com/r/alpine/helm/tags?ordering=last_updated&name=2.17
 FROM alpine/helm:2.17.0 AS helm
 FROM ubuntu:20.04
@@ -26,15 +26,15 @@ ENV COMPOSER_HOME=/.composer \
     # https://archive.apache.org/dist/maven/maven-3
     MAVEN_VERSIONS='3.6.0 3.6.3' \
     # https://github.com/hashicorp/terraform/releases
-    TERRAFORM_VERSION=1.0.6 \
+    TERRAFORM_VERSION=1.0.8 \
 	# https://github.com/GoogleCloudPlatform/cloudsql-proxy/releases
-    SQLPROXY_VERSION=1.24.0 \
+    SQLPROXY_VERSION=1.25.0 \
     # https://github.com/aws/aws-cli/releases
-    AWSCLI_VERSION=2.2.35 \
+    AWSCLI_VERSION=2.2.41 \
     # https://github.com/Azure/kubelogin/releases
     KUBELOGIN_VERSION=0.0.10 \
     # https://github.com/mikefarah/yq/releases
-    YQ_VERSION=4.12.2 \
+    YQ_VERSION=4.13.2 \
     # https://github.com/tianon/gosu/releases
     GOSU_VERSION=1.14
 ENV TZ=Australia/Melbourne \
