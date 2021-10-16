@@ -214,7 +214,7 @@ curl -fsSL https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/s
 tar -xJf /tmp/sfdx.tar.xz -C /opt
 ln -s /opt/sfdx/bin/sfdx /usr/bin/sfdx
 # disable annoying update warnings
-sed -i 's/exports.default = hook;/exports.default = function() {};/' node_modules/@oclif/plugin-warn-if-update-available/lib/hooks/init/check-update.js
+sed -i 's/exports.default = hook;/exports.default = function() {};/' /opt/sfdx/node_modules/@oclif/plugin-warn-if-update-available/lib/hooks/init/check-update.js
 
 
 
