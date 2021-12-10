@@ -219,6 +219,15 @@ sed -i 's/exports.default = hook;/exports.default = function() {};/' /opt/sfdx/n
 
 
 #-------------------------------------------------------------------------
+# Installs Trivy ---------------------------------------------------------
+#-------------------------------------------------------------------------
+mkdir -p /opt/trivy
+curl -fsSL https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz | tar -C /opt/trivy -xvzf -
+ln -s /opt/trivy/trivy /usr/bin/trivy
+
+
+
+#-------------------------------------------------------------------------
 # finishing & clean up ---------------------------------------------------
 #-------------------------------------------------------------------------
 apt clean
