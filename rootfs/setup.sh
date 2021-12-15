@@ -228,6 +228,18 @@ ln -s /opt/trivy/trivy /usr/bin/trivy
 
 
 #-------------------------------------------------------------------------
+# Installs Semgrep -------------------------------------------------------
+#-------------------------------------------------------------------------
+gosu jenkins git clone https://github.com/returntocorp/semgrep.git /tmp/semgrep
+cd /tmp/semgrep
+gosu jenkins git submodule update --init --recursive
+SEMGREP_SKIP_BIN=true gosu jenkins python3 -m pip install ./semgrep
+rm -rf /tmp/semgrep
+ln -s /home/jenkins/.local/bin/semgrep /usr/local/bin/semgrep
+semgrepversion=`semgrep --version`; curl -fsSL https://github.com/returntocorp/semgrep/releases/download/v${semgrepversion}/semgrep-v${semgrepversion}-ubuntu-16.04.tgz | tar zxv -C /usr/local/bin --strip-component=1 --wildcards --no-anchored semgrep-core
+
+
+#-------------------------------------------------------------------------
 # finishing & clean up ---------------------------------------------------
 #-------------------------------------------------------------------------
 apt clean
