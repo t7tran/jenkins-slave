@@ -37,6 +37,8 @@ ENV COMPOSER_HOME=/.composer \
     YQ_VERSION=4.16.1 \
     # https://github.com/aquasecurity/trivy/releases
     TRIVY_VERSION=0.21.2 \
+    # https://github.com/returntocorp/semgrep/releases
+    SEMGREP_VERSION=0.76.2 \
     # https://github.com/tianon/gosu/releases
     GOSU_VERSION=1.14
 ENV TZ=Australia/Melbourne \
