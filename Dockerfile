@@ -26,9 +26,9 @@ ENV COMPOSER_HOME=/.composer \
     # https://archive.apache.org/dist/maven/maven-3
     MAVEN_VERSIONS='3.6.0 3.6.3' \
     # https://github.com/hashicorp/terraform/releases
-    TERRAFORM_VERSION=1.1.0 \
+    TERRAFORM_VERSION=1.1.1 \
 	# https://github.com/GoogleCloudPlatform/cloudsql-proxy/releases
-    SQLPROXY_VERSION=1.27.0 \
+    SQLPROXY_VERSION=1.27.1 \
     # https://github.com/aws/aws-cli/releases
     AWSCLI_VERSION=2.4.6 \
     # https://github.com/Azure/kubelogin/releases
