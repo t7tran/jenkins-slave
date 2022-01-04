@@ -42,7 +42,7 @@ ENV COMPOSER_HOME=/.composer \
     # https://github.com/returntocorp/semgrep/releases
     SEMGREP_VERSION=0.77.0 \
     # https://www.npmjs.com/package/sfdx-cli?activeTab=versions
-    SFDX_VERSION=7.132.0 \
+    SFDX_VERSION=7.131.0 \
     # https://github.com/tianon/gosu/releases
     GOSU_VERSION=1.14
 ENV TZ=Australia/Melbourne \
