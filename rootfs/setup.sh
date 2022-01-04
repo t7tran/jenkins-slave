@@ -162,7 +162,9 @@ apt-get install -y nodejs
 curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 apt update && apt install -y yarn
-npm install -g nexus-npm
+mkdir /opt/npm-global
+chown jenkins:jenkins /opt/npm-global
+gosu jenkins npm install -g nexus-npm
 chown -R jenkins:jenkins /home/jenkins/{.config,.npm}
 
 
@@ -210,12 +212,15 @@ ln -s /usr/bin/chromium /usr/bin/chromium-browser
 #-------------------------------------------------------------------------
 # Installs Salesforce CLI ------------------------------------------------
 #-------------------------------------------------------------------------
-curl -fsSL https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz -o /tmp/sfdx.tar.xz
-tar -xJf /tmp/sfdx.tar.xz -C /opt
-ln -s /opt/sfdx/bin/sfdx /usr/bin/sfdx
+#curl -fsSL https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz -o /tmp/sfdx.tar.xz
+#tar -xJf /tmp/sfdx.tar.xz -C /opt
+#ln -s /opt/sfdx/bin/sfdx /usr/bin/sfdx
 # disable annoying update warnings
-sed -i 's/exports.default = hook;/exports.default = function() {};/' /opt/sfdx/node_modules/@oclif/plugin-warn-if-update-available/lib/hooks/init/check-update.js
+#sed -i 's/exports.default = hook;/exports.default = function() {};/' /opt/sfdx/node_modules/@oclif/plugin-warn-if-update-available/lib/hooks/init/check-update.js
 
+gosu jenkins npm install -g sfdx-cli@${SFDX_VERSION}
+# disable annoying update warnings
+sed -i 's/exports.default = hook;/exports.default = function() {};/' /opt/npm-global/lib/node_modules/sfdx-cli/node_modules/@oclif/plugin-warn-if-update-available/lib/hooks/init/check-update.js
 
 
 #-------------------------------------------------------------------------
@@ -244,6 +249,7 @@ curl -fsSL https://github.com/returntocorp/semgrep/releases/download/v${SEMGREP_
 #-------------------------------------------------------------------------
 # finishing & clean up ---------------------------------------------------
 #-------------------------------------------------------------------------
+for i in /opt/npm-global/bin/*; do [ -L $i ] && cd /usr/local/bin/ && ln -s `realpath $i` `basename $i` && cd -; done
 apt clean
 apt autoremove -y
 rm -rf /var/lib/apt/lists/* /tmp/*

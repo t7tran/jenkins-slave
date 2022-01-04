@@ -19,6 +19,8 @@ FROM alpine/helm:2.17.0 AS helm
 FROM ubuntu:20.04
 
 ENV COMPOSER_HOME=/.composer \
+    # custom npm global packages
+    NPM_CONFIG_PREFIX=/opt/npm-global \
     # apt-cache madison docker-ce
     DOCKER_VERSION=5:20.10.8~3-0~ubuntu-focal \
     # https://github.com/docker/compose/releases
@@ -39,6 +41,8 @@ ENV COMPOSER_HOME=/.composer \
     TRIVY_VERSION=0.22.0 \
     # https://github.com/returntocorp/semgrep/releases
     SEMGREP_VERSION=0.77.0 \
+    # https://www.npmjs.com/package/sfdx-cli?activeTab=versions
+    SFDX_VERSION=7.132.0 \
     # https://github.com/tianon/gosu/releases
     GOSU_VERSION=1.14
 ENV TZ=Australia/Melbourne \
