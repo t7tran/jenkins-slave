@@ -246,10 +246,17 @@ ln -s /opt/semgrep/bin/semgrep /usr/local/bin/semgrep
 curl -fsSL https://github.com/returntocorp/semgrep/releases/download/v${SEMGREP_VERSION}/semgrep-v${SEMGREP_VERSION}-ubuntu-16.04.tgz | tar zxv -C /usr/local/bin --strip-component=1 --wildcards --no-anchored semgrep-core
 
 
+
 #-------------------------------------------------------------------------
-# finishing & clean up ---------------------------------------------------
+# Create NPM symlinks under /usr/local/bin -------------------------------
 #-------------------------------------------------------------------------
-for i in /opt/npm-global/bin/*; do [ -L $i ] && cd /usr/local/bin/ && ln -s `realpath $i` `basename $i` && cd -; done
+for i in /opt/npm-global/bin/*; do [[ -L $i && -x $i ]] && ln -s `realpath $i` /usr/local/bin/`basename $i`; done
+
+
+
+#-------------------------------------------------------------------------
+# Finishing & clean up ---------------------------------------------------
+#-------------------------------------------------------------------------
 apt clean
 apt autoremove -y
 rm -rf /var/lib/apt/lists/* /tmp/*
