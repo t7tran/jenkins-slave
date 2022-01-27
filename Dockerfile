@@ -40,7 +40,7 @@ ENV COMPOSER_HOME=/.composer \
     # https://github.com/aquasecurity/trivy/releases
     TRIVY_VERSION=0.22.0 \
     # https://github.com/returntocorp/semgrep/releases
-    SEMGREP_VERSION=0.79.0 \
+    SEMGREP_VERSION=0.80.0 \
     # https://www.npmjs.com/package/sfdx-cli?activeTab=versions
     SFDX_VERSION=7.134.0 \
     # https://github.com/tianon/gosu/releases
