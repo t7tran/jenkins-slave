@@ -36,13 +36,13 @@ ENV COMPOSER_HOME=/.composer \
     # https://github.com/Azure/kubelogin/releases
     KUBELOGIN_VERSION=0.0.10 \
     # https://github.com/mikefarah/yq/releases
-    YQ_VERSION=4.16.2 \
+    YQ_VERSION=4.18.1 \
     # https://github.com/aquasecurity/trivy/releases
-    TRIVY_VERSION=0.22.0 \
+    TRIVY_VERSION=0.23.0 \
     # https://github.com/returntocorp/semgrep/releases
     SEMGREP_VERSION=0.80.0 \
     # https://www.npmjs.com/package/sfdx-cli?activeTab=versions
-    SFDX_VERSION=7.134.0 \
+    SFDX_VERSION=7.135.0 \
     # https://github.com/tianon/gosu/releases
     GOSU_VERSION=1.14
 ENV TZ=Australia/Melbourne \
