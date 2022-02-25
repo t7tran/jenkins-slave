@@ -28,21 +28,21 @@ ENV COMPOSER_HOME=/.composer \
     # https://archive.apache.org/dist/maven/maven-3
     MAVEN_VERSIONS='3.6.0 3.6.3' \
     # https://github.com/hashicorp/terraform/releases
-    TERRAFORM_VERSION=1.1.5 \
+    TERRAFORM_VERSION=1.1.6 \
 	# https://github.com/GoogleCloudPlatform/cloudsql-proxy/releases
     SQLPROXY_VERSION=1.28.1 \
     # https://github.com/aws/aws-cli/releases
-    AWSCLI_VERSION=2.4.15 \
+    AWSCLI_VERSION=2.4.21 \
     # https://github.com/Azure/kubelogin/releases
-    KUBELOGIN_VERSION=0.0.10 \
+    KUBELOGIN_VERSION=0.0.11 \
     # https://github.com/mikefarah/yq/releases
-    YQ_VERSION=4.18.1 \
+    YQ_VERSION=4.20.2 \
     # https://github.com/aquasecurity/trivy/releases
-    TRIVY_VERSION=0.23.0 \
+    TRIVY_VERSION=0.24.0 \
     # https://github.com/returntocorp/semgrep/releases
-    SEMGREP_VERSION=0.82.0 \
+    SEMGREP_VERSION=0.83.0 \
     # https://www.npmjs.com/package/sfdx-cli?activeTab=versions
-    SFDX_VERSION=7.135.0 \
+    SFDX_VERSION=7.140.0 \
     # https://github.com/tianon/gosu/releases
     GOSU_VERSION=1.14
 ENV TZ=Australia/Melbourne \
