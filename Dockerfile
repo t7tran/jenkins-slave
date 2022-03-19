@@ -12,8 +12,8 @@ RUN apt update && \
 	ln -s /usr/local/lib/node6/bin/npm /usr/local/bin/npm && \
     npm install -g nexus-npm
 
-# https://hub.docker.com/r/jenkins/inbound-agent/tags?ordering=last_updated&name=4.11.2-
-FROM jenkins/inbound-agent:4.11.2-4 AS jnlp
+# https://hub.docker.com/r/jenkins/inbound-agent/tags?ordering=last_updated&name=4.13-1
+FROM jenkins/inbound-agent:4.13-1 AS jnlp
 # https://hub.docker.com/r/alpine/helm/tags?ordering=last_updated&name=2.17
 FROM alpine/helm:2.17.0 AS helm
 FROM ubuntu:20.04
@@ -56,10 +56,10 @@ COPY --from=helm /usr/bin/helm /usr/local/bin/helm
 COPY --from=node6 /usr/local/lib/node6 /usr/local/lib/node6/
 
 # replicate logics from slave image
-# https://github.com/jenkinsci/docker-inbound-agent/blob/master/8/debian/Dockerfile
+# https://github.com/jenkinsci/docker-inbound-agent/blob/master/11/debian/Dockerfile
 # https://github.com/jenkinsci/docker-agent/blob/master/8/bullseye/Dockerfile
 
-ARG VERSION=4.11.2
+ARG VERSION=4.12
 ARG user=jenkins
 ARG group=jenkins
 ARG uid=1000
