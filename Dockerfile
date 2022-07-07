@@ -34,7 +34,7 @@ ENV COMPOSER_HOME=/.composer \
     # https://github.com/aws/aws-cli/releases
     AWSCLI_VERSION=2.7.13 \
     # https://github.com/Azure/kubelogin/releases
-    KUBELOGIN_VERSION=0.0.13 \
+    KUBELOGIN_VERSION=0.0.14 \
     # https://github.com/mikefarah/yq/releases
     YQ_VERSION=4.25.3 \
     # https://github.com/aquasecurity/trivy/releases
