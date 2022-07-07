@@ -39,8 +39,6 @@ ENV COMPOSER_HOME=/.composer \
     YQ_VERSION=4.25.3 \
     # https://github.com/aquasecurity/trivy/releases
     TRIVY_VERSION=0.29.2 \
-    # https://github.com/returntocorp/semgrep/releases
-    SEMGREP_VERSION=0.103.0 \
     # https://www.npmjs.com/package/sfdx-cli?activeTab=versions
     SFDX_VERSION=7.157.0 \
     # https://github.com/tianon/gosu/releases
