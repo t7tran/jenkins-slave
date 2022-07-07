@@ -172,7 +172,7 @@ chown -R jenkins:jenkins /home/jenkins/{.config,.npm}
 #-------------------------------------------------------------------------
 # install php modules ----------------------------------------------------
 #-------------------------------------------------------------------------
-apt install -y php-xml
+apt install -y php-xml php-mbstring php-curl
 
 
 
