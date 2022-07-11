@@ -235,9 +235,7 @@ ln -s /opt/trivy/trivy /usr/bin/trivy
 #-------------------------------------------------------------------------
 # Installs Semgrep -------------------------------------------------------
 #-------------------------------------------------------------------------
-gosu jenkins python3 -m pip install semgrep --no-warn-script-location
-gosu jenkins python3 -m pip install --upgrade requests --no-warn-script-location # fix warning: urllib3 (1.26.10) or chardet (3.0.4) doesn't match a supported version
-ln -s /home/jenkins/.local/bin/semgrep /usr/local/bin/semgrep
+python3 -m pip install semgrep --no-warn-script-location
 
 
 
