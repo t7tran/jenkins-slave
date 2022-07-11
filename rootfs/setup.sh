@@ -236,6 +236,7 @@ ln -s /opt/trivy/trivy /usr/bin/trivy
 # Installs Semgrep -------------------------------------------------------
 #-------------------------------------------------------------------------
 python3 -m pip install semgrep --no-warn-script-location
+python3 -m pip install --upgrade requests --no-warn-script-location # fix warning: urllib3 (1.26.10) or chardet (3.0.4) doesn't match a supported version
 
 
 
