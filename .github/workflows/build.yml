@@ -9,7 +9,7 @@ on:
     branches:
       - master
   schedule:
-    - cron: '15 11 * * 3'
+    - cron: '15 11 1 */1 *' # once a month on the first day
 
 jobs:
   build:
