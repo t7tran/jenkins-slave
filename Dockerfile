@@ -13,7 +13,7 @@ RUN apt update && \
     npm install -g nexus-npm
 
 # https://hub.docker.com/r/jenkins/inbound-agent/tags?ordering=last_updated&name=4.13-2
-FROM jenkins/inbound-agent:4.13-2 AS jnlp
+FROM jenkins/inbound-agent:4.13.3-1 AS jnlp
 # https://hub.docker.com/r/alpine/helm/tags?ordering=last_updated&name=2.17
 FROM alpine/helm:2.17.0 AS helm
 FROM ubuntu:20.04
@@ -26,23 +26,23 @@ ENV COMPOSER_HOME=/.composer \
     # apt-cache madison docker-ce
     DOCKER_VERSION=5:20.10.17~3-0~ubuntu-focal \
     # https://github.com/docker/compose/releases
-    DOCKER_COMPOSE_VERSION=2.9.0 \
+    DOCKER_COMPOSE_VERSION=2.11.0 \
     # https://archive.apache.org/dist/maven/maven-3
     MAVEN_VERSIONS='3.6.0 3.6.3' \
     # https://github.com/hashicorp/terraform/releases
-    TERRAFORM_VERSION=1.2.7 \
+    TERRAFORM_VERSION=1.2.9 \
 	# https://github.com/GoogleCloudPlatform/cloudsql-proxy/releases
-    SQLPROXY_VERSION=1.31.2 \
+    SQLPROXY_VERSION=1.32.0 \
     # https://github.com/aws/aws-cli/tags
-    AWSCLI_VERSION=2.7.21 \
+    AWSCLI_VERSION=2.7.33 \
     # https://github.com/Azure/kubelogin/releases
     KUBELOGIN_VERSION=0.0.20 \
     # https://github.com/mikefarah/yq/releases
-    YQ_VERSION=4.27.2 \
+    YQ_VERSION=4.27.5 \
     # https://github.com/aquasecurity/trivy/releases
-    TRIVY_VERSION=0.30.4 \
+    TRIVY_VERSION=0.32.0 \
     # https://www.npmjs.com/package/sfdx-cli?activeTab=versions
-    SFDX_VERSION=7.162.0 \
+    SFDX_VERSION=7.168.0 \
     # https://github.com/tianon/gosu/releases
     GOSU_VERSION=1.14
 ENV TZ=Australia/Melbourne \
