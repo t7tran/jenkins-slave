@@ -147,7 +147,7 @@ fc-cache -f
 #-------------------------------------------------------------------------
 # install libs required by opencv ----------------------------------------
 #-------------------------------------------------------------------------
-apt install -y libjpeg8 libtiff-dev libdc1394-22
+apt install -y libjpeg8 libtiff-dev libdc1394-25
 curl -fs http://security.ubuntu.com/ubuntu/pool/main/j/jasper/libjasper1_1.900.1-debian1-2.4ubuntu1.3_amd64.deb -o /tmp/libjasper1.deb
 curl -fs http://security.ubuntu.com/ubuntu/pool/main/j/jasper/libjasper-dev_1.900.1-debian1-2.4ubuntu1.3_amd64.deb -o /tmp/libjasper-dev.deb
 apt install /tmp/libjasper1.deb /tmp/libjasper-dev.deb

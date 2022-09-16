@@ -1,4 +1,4 @@
-FROM ubuntu:20.04 as node6
+FROM ubuntu:22.04 as node6
 
 ENV NODE6_VERSION=v6.17.1
 
@@ -16,7 +16,7 @@ RUN apt update && \
 FROM jenkins/inbound-agent:4.13.3-1 AS jnlp
 # https://hub.docker.com/r/alpine/helm/tags?ordering=last_updated&name=2.17
 FROM alpine/helm:2.17.0 AS helm
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 ARG JDKVERSION=17
 
@@ -24,7 +24,7 @@ ENV COMPOSER_HOME=/.composer \
     # custom npm global packages
     NPM_CONFIG_PREFIX=/opt/npm-global \
     # apt-cache madison docker-ce
-    DOCKER_VERSION=5:20.10.17~3-0~ubuntu-focal \
+    DOCKER_VERSION=5:20.10.18~3-0~ubuntu-jammy \
     # https://github.com/docker/compose/releases
     DOCKER_COMPOSE_VERSION=2.11.0 \
     # https://archive.apache.org/dist/maven/maven-3
