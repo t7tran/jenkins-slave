@@ -23,6 +23,8 @@ ARG JDKVERSION=17
 ENV COMPOSER_HOME=/.composer \
     # custom npm global packages
     NPM_CONFIG_PREFIX=/opt/npm-global \
+    # https://github.com/nodejs/Release
+    NODE_LTS_VERSION=18 \
     # apt-cache madison docker-ce
     DOCKER_VERSION=5:20.10.21~3-0~ubuntu-jammy \
     # https://github.com/docker/compose/releases
