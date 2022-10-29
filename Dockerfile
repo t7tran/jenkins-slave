@@ -24,25 +24,25 @@ ENV COMPOSER_HOME=/.composer \
     # custom npm global packages
     NPM_CONFIG_PREFIX=/opt/npm-global \
     # apt-cache madison docker-ce
-    DOCKER_VERSION=5:20.10.18~3-0~ubuntu-jammy \
+    DOCKER_VERSION=5:20.10.21~3-0~ubuntu-jammy \
     # https://github.com/docker/compose/releases
-    DOCKER_COMPOSE_VERSION=2.11.0 \
+    DOCKER_COMPOSE_VERSION=2.12.2 \
     # https://archive.apache.org/dist/maven/maven-3
     MAVEN_VERSIONS='3.6.0 3.6.3' \
     # https://github.com/hashicorp/terraform/releases
-    TERRAFORM_VERSION=1.2.9 \
+    TERRAFORM_VERSION=1.3.3 \
 	# https://github.com/GoogleCloudPlatform/cloudsql-proxy/releases
-    SQLPROXY_VERSION=1.32.0 \
+    SQLPROXY_VERSION=1.33.0 \
     # https://github.com/aws/aws-cli/tags
-    AWSCLI_VERSION=2.7.33 \
+    AWSCLI_VERSION=2.8.7 \
     # https://github.com/Azure/kubelogin/releases
     KUBELOGIN_VERSION=0.0.20 \
     # https://github.com/mikefarah/yq/releases
-    YQ_VERSION=4.27.5 \
+    YQ_VERSION=4.28.2 \
     # https://github.com/aquasecurity/trivy/releases
-    TRIVY_VERSION=0.32.0 \
+    TRIVY_VERSION=0.33.0 \
     # https://www.npmjs.com/package/sfdx-cli?activeTab=versions
-    SFDX_VERSION=7.168.0 \
+    SFDX_VERSION=7.174.0 \
     # https://github.com/tianon/gosu/releases
     GOSU_VERSION=1.14
 ENV TZ=Australia/Melbourne \
