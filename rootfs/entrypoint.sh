@@ -31,4 +31,9 @@ if [[ -f "$INIT_SCRIPT" ]]; then
 	rm -rf /tmp/init.sh
 fi
 
-exec gosu jenkins jenkins-agent $@
+java_version=$(java -version 2>&1 | awk -F '"' '/version/ {print $2}')
+if [[ "${java_version%%.*}" == "1" ]]; then
+	gosu jenkins sh -c "JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64 jenkins-agent $@"
+else
+	exec gosu jenkins jenkins-agent $@
+fi
