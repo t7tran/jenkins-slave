@@ -26,27 +26,27 @@ ENV COMPOSER_HOME=/.composer \
     # https://github.com/nodejs/Release
     NODE_LTS_VERSION=16 \
     # apt-cache madison docker-ce
-    DOCKER_VERSION=5:20.10.21~3-0~ubuntu-jammy \
+    DOCKER_VERSION=5:20.10.22~3-0~ubuntu-jammy \
     # https://github.com/docker/compose/releases
-    DOCKER_COMPOSE_VERSION=2.12.2 \
+    DOCKER_COMPOSE_VERSION=2.14.2 \
     # https://archive.apache.org/dist/maven/maven-3
     MAVEN_VERSIONS='3.6.0 3.6.3' \
     # https://github.com/hashicorp/terraform/releases
-    TERRAFORM_VERSION=1.3.5 \
+    TERRAFORM_VERSION=1.3.6 \
 	# https://github.com/GoogleCloudPlatform/cloudsql-proxy/releases
-    SQLPROXY_VERSION=1.33.0 \
+    SQLPROXY_VERSION=1.33.1 \
     # https://github.com/aws/aws-cli/tags
-    AWSCLI_VERSION=2.9.0 \
+    AWSCLI_VERSION=2.9.12 \
     # https://github.com/Azure/kubelogin/releases
-    KUBELOGIN_VERSION=0.0.24 \
+    KUBELOGIN_VERSION=0.0.25 \
     # https://github.com/mikefarah/yq/releases
-    YQ_VERSION=4.30.4 \
+    YQ_VERSION=4.30.6 \
     # https://github.com/aquasecurity/trivy/releases
-    TRIVY_VERSION=0.34.0 \
+    TRIVY_VERSION=0.36.0 \
     # https://www.npmjs.com/package/sfdx-cli?activeTab=versions
-    SFDX_VERSION=7.177.1 \
+    SFDX_VERSION=7.182.1 \
     # https://github.com/tianon/gosu/releases
-    GOSU_VERSION=1.14
+    GOSU_VERSION=1.16
 ENV TZ=Australia/Melbourne \
     JAVA_HOME=/usr/lib/jvm/java-${JDKVERSION:?17}-openjdk-amd64 \
     PATH=$COMPOSER_HOME/vendor/bin:$PATH
