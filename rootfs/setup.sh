@@ -201,18 +201,13 @@ curl -fsSLo /tmp/terraform.zip https://releases.hashicorp.com/terraform/${TERRAF
 
 
 #-------------------------------------------------------------------------
-# Installs latest Chromium package for testing ---------------------------
+# Installs latest Chrome for puppeteer testing ---------------------------
 #-------------------------------------------------------------------------
-# see https://github.com/puppeteer/puppeteer/blob/main/docs/troubleshooting.md#running-puppeteer-in-docker
-#     https://askubuntu.com/questions/1204571/chromium-without-snap/1206153#1206153
-cp -r /_etc/* /etc && rm -rf /_etc
-apt-key adv --keyserver keyserver.ubuntu.com --recv-keys DCC9EFBF77E11517
-apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 648ACFD622F3D138
-apt-key adv --keyserver keyserver.ubuntu.com --recv-keys AA8E81B4331F7F50
-apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 112695A0E562B32A
-apt update
-apt install --no-install-recommends -y chromium fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf
-ln -s /usr/bin/chromium /usr/bin/chromium-browser
+curl -fsSLo /tmp/chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+apt install /tmp/chrome.deb -y
+apt install --no-install-recommends -y fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf
+ln -s /usr/bin/google-chrome /usr/bin/chromium-browser
+ln -s /usr/bin/google-chrome /usr/bin/chromium
 
 
 
