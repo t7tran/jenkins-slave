@@ -26,7 +26,7 @@ ENV COMPOSER_HOME=/.composer \
     # https://github.com/nodejs/Release
     NODE_LTS_VERSION=16 \
     # apt-cache madison docker-ce
-    DOCKER_VERSION=5:23.0.1-1~ubuntu.22.04~jammy \
+    DOCKER_VERSION=5:20.10.23~3-0~ubuntu-jammy \
     # https://github.com/docker/compose/releases
     DOCKER_COMPOSE_VERSION=2.16.0 \
     # https://archive.apache.org/dist/maven/maven-3
