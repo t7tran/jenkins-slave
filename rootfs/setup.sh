@@ -243,6 +243,14 @@ python3 -m pip install --upgrade requests --no-warn-script-location # fix warnin
 
 
 #-------------------------------------------------------------------------
+# Installs SOPS ----------------------------------------------------------
+#-------------------------------------------------------------------------
+curl  -fsSLo /usr/local/bin/sops https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux
+chmod +x     /usr/local/bin/sops
+
+
+
+#-------------------------------------------------------------------------
 # Create NPM symlinks under /usr/local/bin -------------------------------
 #-------------------------------------------------------------------------
 for i in /opt/npm-global/bin/*; do [[ -L $i && -x $i ]] && ln -s `realpath $i` /usr/local/bin/`basename $i`; done

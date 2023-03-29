@@ -46,7 +46,9 @@ ENV COMPOSER_HOME=/.composer \
     # https://www.npmjs.com/package/sfdx-cli?activeTab=versions
     SFDX_VERSION=7.193.2 \
     # https://github.com/tianon/gosu/releases
-    GOSU_VERSION=1.16
+    GOSU_VERSION=1.16 \
+    # https://github.com/mozilla/sops/releases
+    SOPS_VERSION=3.7.3
 ENV TZ=Australia/Melbourne \
     JAVA_HOME=/usr/lib/jvm/java-${JDKVERSION:?17}-openjdk-amd64 \
     PATH=$COMPOSER_HOME/vendor/bin:$PATH
