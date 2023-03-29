@@ -107,7 +107,7 @@ echo -e '[compute]\ngce_metadata_read_timeout_sec = 30' >> /usr/lib/google-cloud
 #-------------------------------------------------------------------------
 # install cloud_sql_proxy ------------------------------------------------
 #-------------------------------------------------------------------------
-curl -fsSL https://storage.googleapis.com/cloudsql-proxy/v$SQLPROXY_VERSION/cloud_sql_proxy.linux.amd64 -o /usr/local/bin/cloud_sql_proxy
+curl -fsSL https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v${SQLPROXY_VERSION}/cloud-sql-proxy.linux.amd64 -o /usr/local/bin/cloud_sql_proxy
 chmod +x /usr/local/bin/cloud_sql_proxy
 
 
