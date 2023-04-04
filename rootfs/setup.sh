@@ -18,6 +18,7 @@ apt-get install -y \
                 vim \
                 tmux \
                 screen \
+                gettext-base \
                 mc \
                 vim \
                 links \
