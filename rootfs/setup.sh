@@ -46,15 +46,11 @@ gosu nobody true
 
 
 #-------------------------------------------------------------------------
-# install openjdk-$JDKVERSION ------------------------------------------------------
+# install openjdk --------------------------------------------------------
 #-------------------------------------------------------------------------
-apt install -y openjdk-${JDKVERSION:?17}-jdk
-if [[ "${JDKVERSION:?17}" == "8" ]]; then
-    # install jdk11 as the minimum for slave agent
-    apt install -y openjdk-11-jdk
-    # set default back to JDK8
-    update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
-fi
+apt install -y openjdk-8-jdk
+apt install -y openjdk-11-jdk
+apt install -y openjdk-17-jdk
 
 
 

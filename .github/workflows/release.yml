@@ -1,4 +1,4 @@
-name: Release with the latest JDK LTS
+name: Release
 
 on:
   push:

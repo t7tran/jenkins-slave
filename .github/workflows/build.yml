@@ -1,4 +1,4 @@
-name: Build with the latest JDK LTS
+name: Build on every push
 
 on:
   push:

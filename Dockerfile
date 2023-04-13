@@ -18,8 +18,6 @@ FROM jenkins/inbound-agent:3107.v665000b_51092-4 AS jnlp
 FROM alpine/helm:2.17.0 AS helm
 FROM ubuntu:22.04
 
-ARG JDKVERSION=17
-
 ENV COMPOSER_HOME=/.composer \
     # custom npm global packages
     NPM_CONFIG_PREFIX=/opt/npm-global \
@@ -50,7 +48,8 @@ ENV COMPOSER_HOME=/.composer \
     # https://github.com/mozilla/sops/releases
     SOPS_VERSION=3.7.3
 ENV TZ=Australia/Melbourne \
-    JAVA_HOME=/usr/lib/jvm/java-${JDKVERSION:?17}-openjdk-amd64 \
+    JDKVERSION=17 \
+    JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 \
     PATH=$COMPOSER_HOME/vendor/bin:$PATH
 
 COPY --chown=1000:1000 rootfs /
