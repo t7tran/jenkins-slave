@@ -27,6 +27,7 @@ apt-get install -y \
                 wget \
                 jq \
                 xmlstarlet \
+                xvfb \
                 mysql-client \
                 git git-lfs
 apt-get install -y python3-pip
