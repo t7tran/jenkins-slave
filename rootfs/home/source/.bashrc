@@ -28,3 +28,9 @@ alias ls='ls --color=auto'
 alias ll='ls -alF'
 
 HISTIGNORE='[ \t][ \t]*:history*:*[Pp][Aa][Ss][Ss][Ww][Oo][Rr][Dd]*:*[Pp][Aa][Ss][Ss][Ww][Dd]*:exit:\:*:*bash_history*:?:??:mv *:cd *:cp *:rm *:mkdir *:echo *:cat *:kdpf*:vi *:ll *:ls *'
+
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+if [[ -n "$NODE_VERSION" ]]; then
+    nvm use "$NODE_VERSION"
+fi

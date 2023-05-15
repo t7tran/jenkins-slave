@@ -1,17 +1,3 @@
-FROM ubuntu:22.04 as node6
-
-ENV NODE6_VERSION=v6.17.1
-
-RUN apt update && \
-    apt install -y curl && \
-# install nodejs 6.x
-	curl -fsLo /tmp/node6.tar.gz https://nodejs.org/dist/${NODE6_VERSION}/node-${NODE6_VERSION}-linux-x64.tar.gz && \
-	mkdir /usr/local/lib/node6 && \
-	tar -xzvf /tmp/node6.tar.gz -C /usr/local/lib/node6 --strip-component=1 && \
-	ln -s /usr/local/lib/node6/bin/node /usr/local/bin/node && \
-	ln -s /usr/local/lib/node6/bin/npm /usr/local/bin/npm && \
-    npm install -g nexus-npm
-
 # https://hub.docker.com/r/jenkins/inbound-agent/tags?ordering=last_updated&name=3107.
 FROM jenkins/inbound-agent:3107.v665000b_51092-9 AS jnlp
 # https://hub.docker.com/r/alpine/helm/tags?ordering=last_updated&name=2.17
@@ -19,10 +5,6 @@ FROM alpine/helm:2.17.0 AS helm
 FROM ubuntu:22.04
 
 ENV COMPOSER_HOME=/.composer \
-    # custom npm global packages
-    NPM_CONFIG_PREFIX=/opt/npm-global \
-    # https://github.com/nodejs/Release
-    NODE_LTS_VERSION=16 \
     # apt-cache madison docker-ce
     DOCKER_VERSION=5:20.10.23~3-0~ubuntu-jammy \
     # https://github.com/docker/compose/releases
@@ -50,13 +32,13 @@ ENV COMPOSER_HOME=/.composer \
 ENV TZ=Australia/Melbourne \
     JDKVERSION=17 \
     JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 \
+    NVM_DIR=/nvm \
     PATH=$COMPOSER_HOME/vendor/bin:$PATH
 
 COPY --chown=1000:1000 rootfs /
 COPY --from=jnlp /usr/share/jenkins/agent.jar /usr/share/jenkins/
 COPY --from=jnlp /usr/local/bin/jenkins-agent /usr/local/bin/jenkins-agent
 COPY --from=helm /usr/bin/helm /usr/local/bin/helm
-COPY --from=node6 /usr/local/lib/node6 /usr/local/lib/node6/
 
 # replicate logics from slave image
 # https://github.com/jenkinsci/docker-inbound-agent/blob/master/11/debian/Dockerfile
@@ -73,7 +55,7 @@ ENV HOME=/home/${user} \
     AGENT_WORKDIR=${AGENT_WORKDIR}
 
 RUN groupadd -g ${gid} ${group} && \
-    useradd -c "Jenkins user" -d $HOME -u ${uid} -g ${gid} -m ${user} && \
+    useradd -c "Jenkins user" -d $HOME -u ${uid} -g ${gid} -m ${user} -s /bin/bash && \
     mkdir /home/${user}/.jenkins && mkdir -p ${AGENT_WORKDIR} && \
     chown -R ${user}:${group} /home/${user}/ && \
     chmod 755 /usr/share/jenkins && \

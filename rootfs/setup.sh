@@ -160,17 +160,17 @@ apt install /tmp/libjasper1.deb /tmp/libjasper-dev.deb
 
 
 #-------------------------------------------------------------------------
-# install the latest nodejs ----------------------------------------------
+# install nodejs ---------------------------------------------------------
 #-------------------------------------------------------------------------
-curl -sL https://deb.nodesource.com/setup_${NODE_LTS_VERSION}.x | bash -
-apt-get install -y nodejs
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-apt update && apt install -y yarn
-mkdir /opt/npm-global
-chown jenkins:jenkins /opt/npm-global
-gosu jenkins npm install -g nexus-npm
-chown -R jenkins:jenkins /home/jenkins/{.config,.npm}
+mkdir -p $NVM_DIR
+chown jenkins:jenkins $NVM_DIR
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | gosu jenkins bash
+gosu jenkins echo yarn                       >  $NVM_DIR/default-packages
+gosu jenkins echo nexus-npm                  >> $NVM_DIR/default-packages
+gosu jenkins echo sfdx-cli@${SFDX_VERSION:?} >> $NVM_DIR/default-packages
+gosu jenkins nvm-sh install --lts
+gosu jenkins nvm-sh install 16
+gosu jenkins nvm-sh install 6
 
 
 
@@ -212,15 +212,10 @@ ln -s /usr/bin/google-chrome /usr/bin/chromium
 #-------------------------------------------------------------------------
 # Installs Salesforce CLI ------------------------------------------------
 #-------------------------------------------------------------------------
-#curl -fsSL https://developer.salesforce.com/media/salesforce-cli/sfdx/channels/stable/sfdx-linux-x64.tar.xz -o /tmp/sfdx.tar.xz
-#tar -xJf /tmp/sfdx.tar.xz -C /opt
-#ln -s /opt/sfdx/bin/sfdx /usr/bin/sfdx
 # disable annoying update warnings
-#sed -i 's/exports.default = hook;/exports.default = function() {};/' /opt/sfdx/node_modules/@oclif/plugin-warn-if-update-available/lib/hooks/init/check-update.js
-
-gosu jenkins npm install -g sfdx-cli@${SFDX_VERSION}
-# disable annoying update warnings
-sed -i 's/exports.default = hook;/exports.default = function() {};/' /opt/npm-global/lib/node_modules/sfdx-cli/node_modules/@oclif/plugin-warn-if-update-available/lib/hooks/init/check-update.js
+for d in `find $NVM_DIR/versions/node -maxdepth 6 -type d -name '@oclif'`; do
+    sed -i 's/exports.default = hook;/exports.default = function() {};/' $d/plugin-warn-if-update-available/lib/hooks/init/check-update.js
+done
 
 
 #-------------------------------------------------------------------------
@@ -245,13 +240,6 @@ python3 -m pip install --upgrade requests --no-warn-script-location # fix warnin
 #-------------------------------------------------------------------------
 curl  -fsSLo /usr/local/bin/sops https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux
 chmod +x     /usr/local/bin/sops
-
-
-
-#-------------------------------------------------------------------------
-# Create NPM symlinks under /usr/local/bin -------------------------------
-#-------------------------------------------------------------------------
-for i in /opt/npm-global/bin/*; do [[ -L $i && -x $i ]] && ln -s `realpath $i` /usr/local/bin/`basename $i`; done
 
 
 
