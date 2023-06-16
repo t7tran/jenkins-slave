@@ -15,21 +15,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Inject slug/short variables
-        uses: rlespinasse/github-slug-action@v4
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
+      - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          body: |
-            Release ${{ env.GITHUB_REF_SLUG }}.
-          draft: false
-          prerelease: false
+        run: gh release create "$GITHUB_REF_NAME" --notes "Release $GITHUB_REF_NAME"
 
   build-image:
     runs-on: ubuntu-latest
