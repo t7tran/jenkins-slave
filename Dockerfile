@@ -25,6 +25,8 @@ ENV COMPOSER_HOME=/.composer \
     TRIVY_VERSION=0.41.0 \
     # https://www.npmjs.com/package/sfdx-cli?activeTab=versions
     SFDX_VERSION=7.200.7 \
+    # https://www.npmjs.com/package/@salesforce/cli?activeTab=versions
+    SF_VERSION=1.82.6 \
     # https://github.com/tianon/gosu/releases
     GOSU_VERSION=1.16 \
     # https://github.com/mozilla/sops/releases
