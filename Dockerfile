@@ -8,15 +8,15 @@ ENV COMPOSER_HOME=/.composer \
     # apt-cache madison docker-ce
     DOCKER_VERSION=5:20.10.23~3-0~ubuntu-jammy \
     # https://github.com/docker/compose/releases
-    DOCKER_COMPOSE_VERSION=2.18.1 \
+    DOCKER_COMPOSE_VERSION=2.19.1 \
     # https://archive.apache.org/dist/maven/maven-3
     MAVEN_VERSIONS='3.6.0 3.6.3' \
     # https://github.com/hashicorp/terraform/releases
-    TERRAFORM_VERSION=1.5.0 \
+    TERRAFORM_VERSION=1.5.2 \
 	# https://github.com/GoogleCloudPlatform/cloudsql-proxy/releases
-    SQLPROXY_VERSION=2.3.0 \
+    SQLPROXY_VERSION=2.4.0 \
     # https://github.com/aws/aws-cli/tags
-    AWSCLI_VERSION=2.12.0 \
+    AWSCLI_VERSION=2.12.5 \
     # https://github.com/Azure/kubelogin/releases
     KUBELOGIN_VERSION=0.0.30 \
     # https://github.com/mikefarah/yq/releases
@@ -24,9 +24,9 @@ ENV COMPOSER_HOME=/.composer \
     # https://github.com/aquasecurity/trivy/releases
     TRIVY_VERSION=0.42.1 \
     # https://www.npmjs.com/package/sfdx-cli?activeTab=versions
-    SFDX_VERSION=7.205.6 \
+    SFDX_VERSION=7.206.6 \
     # https://www.npmjs.com/package/@salesforce/cli?activeTab=versions
-    SF_VERSION=1.82.6 \
+    SF_VERSION=1.84.8 \
     # https://github.com/tianon/gosu/releases
     GOSU_VERSION=1.16 \
     # https://github.com/mozilla/sops/releases
