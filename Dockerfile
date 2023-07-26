@@ -30,7 +30,9 @@ ENV COMPOSER_HOME=/.composer \
     # https://github.com/tianon/gosu/releases
     GOSU_VERSION=1.16 \
     # https://github.com/mozilla/sops/releases
-    SOPS_VERSION=3.7.3
+    SOPS_VERSION=3.7.3 \
+    # https://github.com/nvm-sh/nvm/releases
+    NVM_VERSION=0.39.4
 ENV TZ=Australia/Melbourne \
     JDKVERSION=17 \
     JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 \
