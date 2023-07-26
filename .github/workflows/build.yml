@@ -43,6 +43,11 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
 
+      - name: Free Disk Space
+        run: |
+          docker rmi -f `docker images --format '{{.Repository}}:{{.Tag}}' | grep 'node:'`
+          docker rmi -f `docker images --format '{{.Repository}}:{{.Tag}}' | grep 'buildpack-deps:'`
+
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
