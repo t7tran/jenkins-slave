@@ -166,7 +166,7 @@ mkdir -p $NVM_DIR
 chown jenkins:jenkins $NVM_DIR
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$NVM_VERSION/install.sh | gosu jenkins bash
 gosu jenkins echo yarn                            >  $NVM_DIR/default-packages
-gosu jenkins echo pnpm                            >  $NVM_DIR/default-packages
+gosu jenkins echo pnpm                            >> $NVM_DIR/default-packages
 gosu jenkins echo nexus-npm                       >> $NVM_DIR/default-packages
 gosu jenkins echo sfdx-cli@${SFDX_VERSION:?}      >> $NVM_DIR/default-packages
 gosu jenkins echo @salesforce/cli@${SF_VERSION:?} >> $NVM_DIR/default-packages
