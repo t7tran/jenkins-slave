@@ -163,16 +163,15 @@ apt install /tmp/libjasper1.deb /tmp/libjasper-dev.deb
 # install nodejs ---------------------------------------------------------
 #-------------------------------------------------------------------------
 mkdir -p $NVM_DIR
-chown jenkins:jenkins $NVM_DIR
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$NVM_VERSION/install.sh | gosu jenkins bash
-gosu jenkins echo yarn                            >  $NVM_DIR/default-packages
-gosu jenkins echo pnpm                            >> $NVM_DIR/default-packages
-gosu jenkins echo nexus-npm                       >> $NVM_DIR/default-packages
-gosu jenkins echo sfdx-cli@${SFDX_VERSION:?}      >> $NVM_DIR/default-packages
-gosu jenkins echo @salesforce/cli@${SF_VERSION:?} >> $NVM_DIR/default-packages
-gosu jenkins nvm-sh install --lts
-gosu jenkins nvm-sh install 16
-gosu jenkins nvm-sh install 6
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$NVM_VERSION/install.sh | bash
+echo yarn                            >  $NVM_DIR/default-packages
+echo pnpm                            >> $NVM_DIR/default-packages
+echo nexus-npm                       >> $NVM_DIR/default-packages
+echo sfdx-cli@${SFDX_VERSION:?}      >> $NVM_DIR/default-packages
+echo @salesforce/cli@${SF_VERSION:?} >> $NVM_DIR/default-packages
+nvm-sh install --lts
+nvm-sh install 16
+nvm-sh install 6
 
 
 
