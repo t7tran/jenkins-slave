@@ -30,6 +30,9 @@ apt-get install -y \
                 xvfb \
                 mysql-client \
                 git git-lfs
+# required by MariaDB4j
+# see https://github.com/MariaDB4j/MariaDB4j#faq
+apt-get install -y libncurses5
 apt-get install -y python3-pip
 curl -fsSL https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION}/yq_linux_amd64 -o /usr/local/bin/yq
 chmod +x /usr/local/bin/yq
