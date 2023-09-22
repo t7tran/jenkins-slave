@@ -242,7 +242,7 @@ python3 -m pip install --upgrade requests --no-warn-script-location # fix warnin
 #-------------------------------------------------------------------------
 # Installs SOPS ----------------------------------------------------------
 #-------------------------------------------------------------------------
-curl  -fsSLo /usr/local/bin/sops https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux
+curl  -fsSLo /usr/local/bin/sops https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux.amd64
 chmod +x     /usr/local/bin/sops
 
 
