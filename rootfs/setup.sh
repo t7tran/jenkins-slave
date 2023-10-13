@@ -176,6 +176,11 @@ nvm-sh install --lts
 nvm-sh install 16
 nvm-sh install 14
 nvm-sh install 6
+# secure sf cli
+for p in `find /nvm/versions/node/ -mindepth 3 -maxdepth 3 -type l -name sf`; do
+    cp --remove-destination /usr/local/bin/ssf ${p}
+    cp --remove-destination /usr/local/bin/ssf ${p}dx
+done
 
 
 
