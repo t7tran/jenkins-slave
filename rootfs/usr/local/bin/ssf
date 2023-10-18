@@ -3,4 +3,16 @@
 set -e
 set -o pipefail
 
+if [[ $1 == "package" && $2 == "version" ]]; then
+    exec `dirname "$0"`/../lib/node_modules/@salesforce/cli/bin/run "$@"
+    exit 0
+fi
+
+for arg in "$@"; do
+    if [[ "$arg" == "--json" ]]; then
+        exec `dirname "$0"`/../lib/node_modules/@salesforce/cli/bin/run "$@" | jq -r . | grep -vi password || true
+        exit 0
+    fi
+done
+
 exec `dirname "$0"`/../lib/node_modules/@salesforce/cli/bin/run "$@" | grep -vi password || true
