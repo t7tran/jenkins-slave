@@ -3,10 +3,12 @@
 set -e
 set -o pipefail
 
-if [[ $1 == "package" && $2 == "version" ]]; then
-    exec `dirname "$0"`/../lib/node_modules/@salesforce/cli/bin/run "$@"
-    exit 0
-fi
+case "$@" in
+    "package version" | "package version "* | "force user password generate"*)
+        exec `dirname "$0"`/../lib/node_modules/@salesforce/cli/bin/run "$@"
+        exit 0
+    ;;
+esac
 
 for arg in "$@"; do
     if [[ "$arg" == "--json" ]]; then
