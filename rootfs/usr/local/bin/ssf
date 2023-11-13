@@ -5,16 +5,16 @@ set -o pipefail
 
 case "$@" in
     "package version" | "package version "* | "force user password generate"*)
-        exec `dirname "$0"`/../lib/node_modules/@salesforce/cli/bin/run "$@"
+        exec `dirname "$0"`/../lib/node_modules/@salesforce/cli/bin/run.js "$@"
         exit 0
     ;;
 esac
 
 for arg in "$@"; do
     if [[ "$arg" == "--json" ]]; then
-        exec `dirname "$0"`/../lib/node_modules/@salesforce/cli/bin/run "$@" | jq -r . | grep -vi password || true
+        exec `dirname "$0"`/../lib/node_modules/@salesforce/cli/bin/run.js "$@" | jq -r . | grep -vi password || true
         exit 0
     fi
 done
 
-exec `dirname "$0"`/../lib/node_modules/@salesforce/cli/bin/run "$@" | grep -vi password || true
+exec `dirname "$0"`/../lib/node_modules/@salesforce/cli/bin/run.js "$@" | grep -vi password || true
