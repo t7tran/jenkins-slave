@@ -6,7 +6,7 @@ FROM ubuntu:22.04
 
 ENV COMPOSER_HOME=/.composer \
     # apt-cache madison docker-ce
-    DOCKER_VERSION=5:24.0.6-1~ubuntu.22.04~jammy \
+    DOCKER_VERSION=5:24.0.7-1~ubuntu.22.04~jammy \
     # https://github.com/docker/compose/releases
     DOCKER_COMPOSE_VERSION=2.23.0 \
     # https://archive.apache.org/dist/maven/maven-3
@@ -16,7 +16,7 @@ ENV COMPOSER_HOME=/.composer \
 	# https://github.com/GoogleCloudPlatform/cloudsql-proxy/releases
     SQLPROXY_VERSION=2.7.1 \
     # https://github.com/aws/aws-cli/tags
-    AWSCLI_VERSION=2.13.33 \
+    AWSCLI_VERSION=2.13.34 \
     # https://github.com/Azure/kubelogin/releases
     KUBELOGIN_VERSION=0.0.33 \
     # https://github.com/mikefarah/yq/releases
@@ -26,7 +26,7 @@ ENV COMPOSER_HOME=/.composer \
     # https://www.npmjs.com/package/sfdx-cli?activeTab=versions
     SFDX_VERSION=7.209.6 \
     # https://www.npmjs.com/package/@salesforce/cli?activeTab=versions
-    SF_VERSION=2.16.7 \
+    SF_VERSION=2.16.10 \
     # https://github.com/tianon/gosu/releases
     GOSU_VERSION=1.17 \
     # https://github.com/mozilla/sops/releases
