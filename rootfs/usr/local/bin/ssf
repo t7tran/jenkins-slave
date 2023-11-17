@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
-set -e
-set -o pipefail
+set -eo pipefail
+
+if [[ "$SSF_BYPASS" == "yep" ]]; then
+    exec `dirname "$0"`/../lib/node_modules/@salesforce/cli/bin/run.js "$@"
+    exit 0
+fi
 
 case "$@" in
     "package version" | "package version "* | "force user password generate"*)
