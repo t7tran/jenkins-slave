@@ -8,31 +8,31 @@ ENV COMPOSER_HOME=/.composer \
     # apt-cache madison docker-ce
     DOCKER_VERSION=5:24.0.7-1~ubuntu.22.04~jammy \
     # https://github.com/docker/compose/releases
-    DOCKER_COMPOSE_VERSION=2.23.1 \
+    DOCKER_COMPOSE_VERSION=2.23.3 \
     # https://archive.apache.org/dist/maven/maven-3
     MAVEN_VERSIONS='3.6.0 3.6.3' \
     # https://github.com/hashicorp/terraform/releases
-    TERRAFORM_VERSION=1.6.4 \
+    TERRAFORM_VERSION=1.6.6 \
 	# https://github.com/GoogleCloudPlatform/cloudsql-proxy/releases
-    SQLPROXY_VERSION=2.7.2 \
+    SQLPROXY_VERSION=2.8.1 \
     # https://github.com/aws/aws-cli/tags
-    AWSCLI_VERSION=2.13.36 \
+    AWSCLI_VERSION=2.15.1 \
     # https://github.com/Azure/kubelogin/releases
-    KUBELOGIN_VERSION=0.0.33 \
+    KUBELOGIN_VERSION=0.0.34 \
     # https://github.com/mikefarah/yq/releases
-    YQ_VERSION=4.35.2 \
+    YQ_VERSION=4.40.5 \
     # https://github.com/aquasecurity/trivy/releases
-    TRIVY_VERSION=0.47.0 \
+    TRIVY_VERSION=0.48.0 \
     # https://www.npmjs.com/package/sfdx-cli?activeTab=versions
     SFDX_VERSION=7.209.6 \
     # https://www.npmjs.com/package/@salesforce/cli?activeTab=versions
-    SF_VERSION=2.17.14 \
+    SF_VERSION=2.21.8 \
     # https://github.com/tianon/gosu/releases
     GOSU_VERSION=1.17 \
     # https://github.com/mozilla/sops/releases
     SOPS_VERSION=3.8.1 \
     # https://github.com/nvm-sh/nvm/releases
-    NVM_VERSION=0.39.5
+    NVM_VERSION=0.39.7
 ENV TZ=Australia/Melbourne \
     JDKVERSION=17 \
     JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 \
