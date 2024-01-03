@@ -16,13 +16,13 @@ ENV COMPOSER_HOME=/.composer \
 	# https://github.com/GoogleCloudPlatform/cloudsql-proxy/releases
     SQLPROXY_VERSION=2.8.1 \
     # https://github.com/aws/aws-cli/tags
-    AWSCLI_VERSION=2.15.1 \
+    AWSCLI_VERSION=2.15.6 \
     # https://github.com/Azure/kubelogin/releases
-    KUBELOGIN_VERSION=0.0.34 \
+    KUBELOGIN_VERSION=0.1.0 \
     # https://github.com/mikefarah/yq/releases
     YQ_VERSION=4.40.5 \
     # https://github.com/aquasecurity/trivy/releases
-    TRIVY_VERSION=0.48.0 \
+    TRIVY_VERSION=0.48.1 \
     # https://www.npmjs.com/package/sfdx-cli?activeTab=versions
     SFDX_VERSION=7.209.6 \
     # https://www.npmjs.com/package/@salesforce/cli?activeTab=versions
