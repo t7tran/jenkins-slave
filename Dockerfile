@@ -1,5 +1,5 @@
 # https://hub.docker.com/r/jenkins/inbound-agent/tags?ordering=last_updated&name=3192.
-FROM jenkins/inbound-agent:3192.v713e3b_039fb_e-5-jdk17 AS jnlp
+FROM jenkins/inbound-agent:3198.v03a_401881f3e-1-jdk17 AS jnlp
 # https://hub.docker.com/r/alpine/helm/tags?ordering=last_updated&name=2.17
 FROM alpine/helm:2.17.0 AS helm
 FROM ubuntu:22.04
@@ -48,7 +48,7 @@ COPY --from=helm /usr/bin/helm /usr/local/bin/helm
 # https://github.com/jenkinsci/docker-inbound-agent/blob/master/debian/Dockerfile
 # https://github.com/jenkinsci/docker-agent/blob/master/debian/Dockerfile
 
-ARG VERSION=3192.v713e3b_039fb_e-5
+ARG VERSION=3198.v03a_401881f3e-1
 ARG user=jenkins
 ARG group=jenkins
 ARG uid=1000
