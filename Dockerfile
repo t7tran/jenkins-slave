@@ -31,6 +31,8 @@ ENV COMPOSER_HOME=/.composer \
     SFDMU_VERSION=4.33.17 \
     # https://www.npmjs.com/package/@salesforce/sfdx-scanner?activeTab=versions
     SFDX_SCANNER_VERSION=4.1.0 \
+    # https://www.npmjs.com/package/sfdx-git-delta?activeTab=versions
+    SFDX_GITDELTA_VERSION=5.39.2 \
     # https://github.com/tianon/gosu/releases
     GOSU_VERSION=1.17 \
     # https://github.com/mozilla/sops/releases
