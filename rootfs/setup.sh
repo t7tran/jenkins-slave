@@ -189,6 +189,7 @@ for p in `find /nvm/versions/node/ -mindepth 3 -maxdepth 3 -type l -name sf`; do
 done
 
 . /nvm/nvm.sh
+mkdir -p /home/jenkins/.sf /home/jenkins/.cache /home/jenkins/.npm
 chown -R jenkins:jenkins /home/jenkins/.sf /home/jenkins/.cache /home/jenkins/.npm
 gosu jenkins sf plugins install sfdmu@${SFDMU_VERSION:?} && \
 gosu jenkins sf plugins install @salesforce/sfdx-scanner@${SFDX_SCANNER_VERSION:?} && \
