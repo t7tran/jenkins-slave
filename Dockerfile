@@ -23,8 +23,6 @@ ENV COMPOSER_HOME=/.composer \
     YQ_VERSION=4.44.2 \
     # https://github.com/aquasecurity/trivy/releases
     TRIVY_VERSION=0.52.2 \
-    # https://www.npmjs.com/package/sfdx-cli?activeTab=versions
-    SFDX_VERSION=7.209.6 \
     # https://www.npmjs.com/package/@salesforce/cli?activeTab=versions
     SF_VERSION=2.46.6 \
     # https://www.npmjs.com/package/sfdmu?activeTab=versions

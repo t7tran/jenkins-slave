@@ -170,7 +170,6 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$NVM_VERSION/install.sh |
 echo yarn                            >  $NVM_DIR/default-packages
 echo pnpm                            >> $NVM_DIR/default-packages
 echo nexus-npm                       >> $NVM_DIR/default-packages
-echo sfdx-cli@${SFDX_VERSION:?}      >> $NVM_DIR/default-packages
 echo @salesforce/cli@${SF_VERSION:?} >> $NVM_DIR/default-packages
 nvm-sh install --lts
 nvm-sh install 18
