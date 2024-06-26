@@ -34,7 +34,7 @@ apt-get install -y \
 # see https://github.com/MariaDB4j/MariaDB4j#faq
 apt-get install -y libncurses5
 apt-get install -y python3-pip
-curl -fsSL https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION}/yq_linux_amd64 -o /usr/local/bin/yq
+curl -fsSL https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION:?}/yq_linux_amd64 -o /usr/local/bin/yq
 chmod +x /usr/local/bin/yq
 
 
@@ -43,7 +43,7 @@ chmod +x /usr/local/bin/yq
 # install gosu -----------------------------------------------------------
 #-------------------------------------------------------------------------
 dpkgArch="$(dpkg --print-architecture | awk -F- '{ print $NF }')"
-curl -fsLo /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/${GOSU_VERSION}/gosu-$dpkgArch"
+curl -fsLo /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/${GOSU_VERSION:?}/gosu-$dpkgArch"
 chmod +x /usr/local/bin/gosu
 gosu nobody true
 
@@ -61,7 +61,7 @@ apt install -y openjdk-8-jdk
 #-------------------------------------------------------------------------
 # install multiple maven versions ----------------------------------------
 #-------------------------------------------------------------------------
-for v in $MAVEN_VERSIONS; do \
+for v in ${MAVEN_VERSIONS:?}; do \
     curl -fsLo /tmp/maven.tar.gz https://archive.apache.org/dist/maven/maven-3/$v/binaries/apache-maven-$v-bin.tar.gz
     tar xf /tmp/maven.tar.gz -C /opt
     rm -rf /tmp/maven.tar.gz /usr/bin/mvn /usr/bin/mvn-$v
@@ -80,14 +80,14 @@ curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 apt-key fingerprint 0EBFCD88
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 # list docker-ce versions: apt-cache madison docker-ce
-apt update && apt install -y docker-ce=${DOCKER_VERSION}
+apt update && apt install -y docker-ce=${DOCKER_VERSION:?}
 
 
 
 #-------------------------------------------------------------------------
 # install docker-compose -------------------------------------------------
 #-------------------------------------------------------------------------
-curl -L "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+curl -L "https://github.com/docker/compose/releases/download/v${DOCKER_COMPOSE_VERSION:?}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
 
@@ -106,9 +106,15 @@ echo -e '[compute]\ngce_metadata_read_timeout_sec = 30' >> /usr/lib/google-cloud
 
 
 #-------------------------------------------------------------------------
+# install gcrane ---------------------------------------------------------
+#-------------------------------------------------------------------------
+curl -fsSL https://github.com/google/go-containerregistry/releases/download/v${GCRANE_VERSION:?}/go-containerregistry_Linux_x86_64.tar.gz | tar -C /usr/local/bin -xvzf - gcrane 
+
+
+#-------------------------------------------------------------------------
 # install cloud_sql_proxy ------------------------------------------------
 #-------------------------------------------------------------------------
-curl -fsSL https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v${SQLPROXY_VERSION}/cloud-sql-proxy.linux.amd64 -o /usr/local/bin/cloud_sql_proxy
+curl -fsSL https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v${SQLPROXY_VERSION:?}/cloud-sql-proxy.linux.amd64 -o /usr/local/bin/cloud_sql_proxy
 chmod +x /usr/local/bin/cloud_sql_proxy
 
 
@@ -116,7 +122,7 @@ chmod +x /usr/local/bin/cloud_sql_proxy
 #-------------------------------------------------------------------------
 # install aws-cli --------------------------------------------------------
 #-------------------------------------------------------------------------
-curl -fsSL https://awscli.amazonaws.com/awscli-exe-linux-x86_64-$AWSCLI_VERSION.zip -o /tmp/awscliv2.zip
+curl -fsSL https://awscli.amazonaws.com/awscli-exe-linux-x86_64-${AWSCLI_VERSION:?}.zip -o /tmp/awscliv2.zip
 unzip /tmp/awscliv2.zip -d /tmp
 /tmp/aws/install
 
@@ -126,7 +132,7 @@ unzip /tmp/awscliv2.zip -d /tmp
 # install azure-cli ------------------------------------------------------
 #-------------------------------------------------------------------------
 curl -sL https://aka.ms/InstallAzureCLIDeb | bash
-curl -fsSLo /tmp/kubelogin.zip https://github.com/Azure/kubelogin/releases/download/v${KUBELOGIN_VERSION}/kubelogin-linux-amd64.zip
+curl -fsSLo /tmp/kubelogin.zip https://github.com/Azure/kubelogin/releases/download/v${KUBELOGIN_VERSION:?}/kubelogin-linux-amd64.zip
 unzip -j /tmp/kubelogin.zip -d /usr/local/bin/
 
 
@@ -165,12 +171,12 @@ apt install /tmp/libjasper1.deb /tmp/libjasper-dev.deb
 #-------------------------------------------------------------------------
 # install nodejs ---------------------------------------------------------
 #-------------------------------------------------------------------------
-mkdir -p $NVM_DIR
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v$NVM_VERSION/install.sh | bash
-echo yarn                            >  $NVM_DIR/default-packages
-echo pnpm                            >> $NVM_DIR/default-packages
-echo nexus-npm                       >> $NVM_DIR/default-packages
-echo @salesforce/cli@${SF_VERSION:?} >> $NVM_DIR/default-packages
+mkdir -p ${NVM_DIR:?}
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION:?}/install.sh | bash
+echo yarn                            >  ${NVM_DIR:?}/default-packages
+echo pnpm                            >> ${NVM_DIR:?}/default-packages
+echo nexus-npm                       >> ${NVM_DIR:?}/default-packages
+echo @salesforce/cli@${SF_VERSION:?} >> ${NVM_DIR:?}/default-packages
 nvm-sh install --lts
 nvm-sh install 18
 nvm-sh install 16
@@ -203,17 +209,17 @@ apt install -y php-xml php-mbstring php-curl
 #-------------------------------------------------------------------------
 # install composer -------------------------------------------------------
 #-------------------------------------------------------------------------
-mkdir -p $COMPOSER_HOME/cache
-chmod 777 $COMPOSER_HOME/cache
-mkdir -p $COMPOSER_HOME/vendor/bin
-curl -sSL https://getcomposer.org/installer | php -- --1 --install-dir=$COMPOSER_HOME/vendor/bin --filename=composer
+mkdir -p ${COMPOSER_HOME:?}/cache
+chmod 777 ${COMPOSER_HOME:?}/cache
+mkdir -p ${COMPOSER_HOME:?}/vendor/bin
+curl -sSL https://getcomposer.org/installer | php -- --1 --install-dir=${COMPOSER_HOME:?}/vendor/bin --filename=composer
 
 
 
 #-------------------------------------------------------------------------
 # install terraform ------------------------------------------------------
 #-------------------------------------------------------------------------
-curl -fsSLo /tmp/terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip; unzip /tmp/terraform.zip -d /usr/local/bin/
+curl -fsSLo /tmp/terraform.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION:?}/terraform_${TERRAFORM_VERSION:?}_linux_amd64.zip; unzip /tmp/terraform.zip -d /usr/local/bin/
 
 
 
@@ -232,7 +238,7 @@ ln -s /usr/bin/google-chrome /usr/bin/chromium
 # Installs Salesforce CLI ------------------------------------------------
 #-------------------------------------------------------------------------
 # disable annoying update warnings
-for d in `find $NVM_DIR/versions/node -maxdepth 6 -type d -name '@oclif'`; do
+for d in `find ${NVM_DIR:?}/versions/node -maxdepth 6 -type d -name '@oclif'`; do
     sed -i 's/exports.default = hook;/exports.default = function() {};/' $d/plugin-warn-if-update-available/lib/hooks/init/check-update.js
 done
 
@@ -241,7 +247,7 @@ done
 # Installs Trivy ---------------------------------------------------------
 #-------------------------------------------------------------------------
 mkdir -p /opt/trivy
-curl -fsSL https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz | tar -C /opt/trivy -xvzf -
+curl -fsSL https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION:?}/trivy_${TRIVY_VERSION:?}_Linux-64bit.tar.gz | tar -C /opt/trivy -xvzf -
 ln -s /opt/trivy/trivy /usr/bin/trivy
 
 
@@ -257,7 +263,7 @@ python3 -m pip install --upgrade requests --no-warn-script-location # fix warnin
 #-------------------------------------------------------------------------
 # Installs SOPS ----------------------------------------------------------
 #-------------------------------------------------------------------------
-curl  -fsSLo /usr/local/bin/sops https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION}/sops-v${SOPS_VERSION}.linux.amd64
+curl  -fsSLo /usr/local/bin/sops https://github.com/mozilla/sops/releases/download/v${SOPS_VERSION:?}/sops-v${SOPS_VERSION:?}.linux.amd64
 chmod +x     /usr/local/bin/sops
 
 
