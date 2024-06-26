@@ -6,33 +6,33 @@ FROM ubuntu:22.04
 
 ENV COMPOSER_HOME=/.composer \
     # apt-cache madison docker-ce
-    DOCKER_VERSION=5:26.1.1-1~ubuntu.22.04~jammy \
+    DOCKER_VERSION=5:27.0.1-1~ubuntu.22.04~jammy \
     # https://github.com/docker/compose/releases
-    DOCKER_COMPOSE_VERSION=2.27.0 \
+    DOCKER_COMPOSE_VERSION=2.28.1 \
     # https://archive.apache.org/dist/maven/maven-3
     MAVEN_VERSIONS='3.6.0 3.6.3' \
     # https://github.com/hashicorp/terraform/releases
-    TERRAFORM_VERSION=1.8.3 \
+    TERRAFORM_VERSION=1.8.5 \
 	# https://github.com/GoogleCloudPlatform/cloudsql-proxy/releases
-    SQLPROXY_VERSION=2.11.1 \
+    SQLPROXY_VERSION=2.11.4 \
     # https://github.com/aws/aws-cli/tags
-    AWSCLI_VERSION=2.15.45 \
+    AWSCLI_VERSION=2.17.2 \
     # https://github.com/Azure/kubelogin/releases
     KUBELOGIN_VERSION=0.1.3 \
     # https://github.com/mikefarah/yq/releases
-    YQ_VERSION=4.44.1 \
+    YQ_VERSION=4.44.2 \
     # https://github.com/aquasecurity/trivy/releases
-    TRIVY_VERSION=0.51.1 \
+    TRIVY_VERSION=0.52.2 \
     # https://www.npmjs.com/package/sfdx-cli?activeTab=versions
     SFDX_VERSION=7.209.6 \
     # https://www.npmjs.com/package/@salesforce/cli?activeTab=versions
-    SF_VERSION=2.41.8 \
+    SF_VERSION=2.46.6 \
     # https://www.npmjs.com/package/sfdmu?activeTab=versions
     SFDMU_VERSION=4.33.17 \
     # https://www.npmjs.com/package/@salesforce/sfdx-scanner?activeTab=versions
-    SFDX_SCANNER_VERSION=4.1.0 \
+    SFDX_SCANNER_VERSION=4.3.0 \
     # https://www.npmjs.com/package/sfdx-git-delta?activeTab=versions
-    SFDX_GITDELTA_VERSION=5.39.2 \
+    SFDX_GITDELTA_VERSION=5.40.2 \
     # https://github.com/tianon/gosu/releases
     GOSU_VERSION=1.17 \
     # https://github.com/mozilla/sops/releases
