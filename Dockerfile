@@ -6,39 +6,39 @@ FROM ubuntu:22.04
 
 ENV COMPOSER_HOME=/.composer \
     # apt-cache madison docker-ce
-    DOCKER_VERSION=5:27.0.1-1~ubuntu.22.04~jammy \
+    DOCKER_VERSION=5:27.1.1-1~ubuntu.22.04~jammy \
     # https://github.com/docker/compose/releases
-    DOCKER_COMPOSE_VERSION=2.28.1 \
+    DOCKER_COMPOSE_VERSION=2.29.1 \
     # https://archive.apache.org/dist/maven/maven-3
     MAVEN_VERSIONS='3.6.0 3.6.3' \
     # https://github.com/hashicorp/terraform/releases
-    TERRAFORM_VERSION=1.8.5 \
+    TERRAFORM_VERSION=1.9.4 \
 	# https://github.com/GoogleCloudPlatform/cloudsql-proxy/releases
-    SQLPROXY_VERSION=2.11.4 \
+    SQLPROXY_VERSION=2.12.0 \
     # https://github.com/aws/aws-cli/tags
-    AWSCLI_VERSION=2.17.2 \
+    AWSCLI_VERSION=2.17.25 \
     # https://github.com/Azure/kubelogin/releases
-    KUBELOGIN_VERSION=0.1.3 \
+    KUBELOGIN_VERSION=0.1.4 \
     # https://github.com/mikefarah/yq/releases
-    YQ_VERSION=4.44.2 \
+    YQ_VERSION=4.44.3 \
     # https://github.com/aquasecurity/trivy/releases
-    TRIVY_VERSION=0.52.2 \
+    TRIVY_VERSION=0.54.1 \
     # https://www.npmjs.com/package/@salesforce/cli?activeTab=versions
-    SF_VERSION=2.46.6 \
+    SF_VERSION=2.53.6 \
     # https://www.npmjs.com/package/sfdmu?activeTab=versions
-    SFDMU_VERSION=4.33.17 \
+    SFDMU_VERSION=4.33.18 \
     # https://www.npmjs.com/package/@salesforce/sfdx-scanner?activeTab=versions
-    SFDX_SCANNER_VERSION=4.3.0 \
+    SFDX_SCANNER_VERSION=4.4.0 \
     # https://www.npmjs.com/package/sfdx-git-delta?activeTab=versions
-    SFDX_GITDELTA_VERSION=5.40.2 \
+    SFDX_GITDELTA_VERSION=5.42.0 \
     # https://github.com/tianon/gosu/releases
     GOSU_VERSION=1.17 \
     # https://github.com/mozilla/sops/releases
-    SOPS_VERSION=3.8.1 \
+    SOPS_VERSION=3.9.0 \
     # https://github.com/nvm-sh/nvm/releases
-    NVM_VERSION=0.39.7 \
+    NVM_VERSION=0.40.0 \
     # https://github.com/google/go-containerregistry/releases
-    GCRANE_VERSION=0.19.2
+    GCRANE_VERSION=0.20.2
 ENV TZ=Australia/Melbourne \
     JDKVERSION=17 \
     JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 \
