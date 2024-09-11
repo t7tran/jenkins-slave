@@ -45,8 +45,7 @@ jobs:
 
       - name: Free Disk Space
         run: |
-          docker rmi -f `docker images --format '{{.Repository}}:{{.Tag}}' | grep 'node:'`
-          docker rmi -f `docker images --format '{{.Repository}}:{{.Tag}}' | grep 'buildpack-deps:'`
+          docker rmi -f `docker images --format '{{.Repository}}:{{.Tag}}' | grep 'node:'` `docker images --format '{{.Repository}}:{{.Tag}}' | grep 'buildpack-deps:'`
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
