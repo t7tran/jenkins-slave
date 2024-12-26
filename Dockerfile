@@ -1,5 +1,5 @@
-# https://hub.docker.com/r/jenkins/inbound-agent/tags?ordering=last_updated&name=3261.
-FROM jenkins/inbound-agent:3261.v9c670a_4748a_9-4-jdk17 AS jnlp
+# https://hub.docker.com/r/jenkins/inbound-agent/tags?ordering=last_updated&name=3283.
+FROM jenkins/inbound-agent:3283.v92c105e0f819-4-jdk17 AS jnlp
 # https://hub.docker.com/r/alpine/helm/tags?ordering=last_updated&name=2.17
 FROM alpine/helm:2.17.0 AS helm
 FROM ubuntu:22.04
@@ -55,7 +55,7 @@ COPY --from=helm /usr/bin/helm /usr/local/bin/helm
 # https://github.com/jenkinsci/docker-agent/blob/master/debian/Dockerfile
 
 # https://repo.jenkins-ci.org/artifactory/public/org/jenkins-ci/main/remoting/
-ARG VERSION=3261.v9c670a_4748a_9
+ARG VERSION=3283.v92c105e0f819
 ARG user=jenkins
 ARG group=jenkins
 ARG uid=1000
