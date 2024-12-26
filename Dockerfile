@@ -8,33 +8,33 @@ ENV COMPOSER_HOME=/.composer \
     # apt-cache madison docker-ce
     DOCKER_VERSION=5:27.2.1-1~ubuntu.22.04~jammy \
     # https://github.com/docker/compose/releases
-    DOCKER_COMPOSE_VERSION=2.29.2 \
+    DOCKER_COMPOSE_VERSION=2.32.1 \
     # https://archive.apache.org/dist/maven/maven-3
     MAVEN_VERSIONS='3.6.0 3.6.3' \
     # https://github.com/hashicorp/terraform/releases
-    TERRAFORM_VERSION=1.9.5 \
+    TERRAFORM_VERSION=1.10.3 \
 	# https://github.com/GoogleCloudPlatform/cloudsql-proxy/releases
-    SQLPROXY_VERSION=2.13.0 \
+    SQLPROXY_VERSION=2.14.2 \
     # https://github.com/aws/aws-cli/tags
-    AWSCLI_VERSION=2.17.48 \
+    AWSCLI_VERSION=2.22.23 \
     # https://github.com/Azure/kubelogin/releases
-    KUBELOGIN_VERSION=0.1.4 \
+    KUBELOGIN_VERSION=0.1.6 \
     # https://github.com/mikefarah/yq/releases
-    YQ_VERSION=4.44.3 \
+    YQ_VERSION=4.44.6 \
     # https://github.com/aquasecurity/trivy/releases
-    TRIVY_VERSION=0.55.0 \
+    TRIVY_VERSION=0.58.1 \
     # https://www.npmjs.com/package/@salesforce/cli?activeTab=versions
-    SF_VERSION=2.57.7 \
+    SF_VERSION=2.70.7 \
     # https://www.npmjs.com/package/sfdmu?activeTab=versions
-    SFDMU_VERSION=4.36.0 \
+    SFDMU_VERSION=4.37.0 \
     # https://www.npmjs.com/package/@salesforce/sfdx-scanner?activeTab=versions
-    SFDX_SCANNER_VERSION=4.5.0 \
+    SFDX_SCANNER_VERSION=4.7.0 \
     # https://www.npmjs.com/package/sfdx-git-delta?activeTab=versions
-    SFDX_GITDELTA_VERSION=5.43.0 \
+    SFDX_GITDELTA_VERSION=5.52.0 \
     # https://github.com/tianon/gosu/releases
     GOSU_VERSION=1.17 \
     # https://github.com/mozilla/sops/releases
-    SOPS_VERSION=3.9.0 \
+    SOPS_VERSION=3.9.2 \
     # https://github.com/nvm-sh/nvm/releases
     NVM_VERSION=0.40.1 \
     # https://github.com/google/go-containerregistry/releases
