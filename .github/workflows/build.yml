@@ -33,6 +33,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
+      - name: Free Disk Space (pre-build)
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: true
+
       - name: Build and export to Docker
         uses: docker/build-push-action@v3
         with:
@@ -42,10 +47,6 @@ jobs:
           load: true
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
-
-      - name: Free Disk Space
-        run: |
-          docker rmi -f `docker images --format '{{.Repository}}:{{.Tag}}' | grep 'node:'` `docker images --format '{{.Repository}}:{{.Tag}}' | grep 'buildpack-deps:'`
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
