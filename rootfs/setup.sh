@@ -32,7 +32,9 @@ apt-get install -y \
                 git git-lfs
 # required by MariaDB4j
 # see https://github.com/MariaDB4j/MariaDB4j#faq
-apt-get install -y libncurses5
+curl -fsSLo /tmp/libtinfo.deb https://archive.ubuntu.com/ubuntu/pool/universe/n/ncurses/libtinfo5_6.3-2_amd64.deb && dpkg -i /tmp/libtinfo.deb && rm -f /tmp/libtinfo.deb
+curl -fsSLo /tmp/libncurses5.deb https://archive.ubuntu.com/ubuntu/pool/universe/n/ncurses/libncurses5_6.3-2_amd64.deb && dpkg -i /tmp/libncurses5.deb && rm -f /tmp/libncurses5.deb
+
 apt-get install -y python3-pip
 curl -fsSL https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION:?}/yq_linux_amd64 -o /usr/local/bin/yq
 chmod +x /usr/local/bin/yq
@@ -256,8 +258,8 @@ ln -s /opt/trivy/trivy /usr/bin/trivy
 #-------------------------------------------------------------------------
 # Installs Semgrep -------------------------------------------------------
 #-------------------------------------------------------------------------
-python3 -m pip install semgrep --no-warn-script-location
-python3 -m pip install --upgrade requests --no-warn-script-location # fix warning: urllib3 (1.26.10) or chardet (3.0.4) doesn't match a supported version
+python3 -m pip install semgrep --no-warn-script-location --break-system-packages
+# python3 -m pip install --upgrade requests --no-warn-script-location --break-system-packages # fix warning: urllib3 (1.26.10) or chardet (3.0.4) doesn't match a supported version
 
 
 

@@ -2,11 +2,11 @@
 FROM jenkins/inbound-agent:3283.v92c105e0f819-4-jdk17 AS jnlp
 # https://hub.docker.com/r/alpine/helm/tags?ordering=last_updated&name=2.17
 FROM alpine/helm:2.17.0 AS helm
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 ENV COMPOSER_HOME=/.composer \
     # apt-cache madison docker-ce
-    DOCKER_VERSION=5:27.2.1-1~ubuntu.22.04~jammy \
+    DOCKER_VERSION=5:27.4.1-1~ubuntu.24.04~noble \
     # https://github.com/docker/compose/releases
     DOCKER_COMPOSE_VERSION=2.32.1 \
     # https://archive.apache.org/dist/maven/maven-3
@@ -65,7 +65,8 @@ ARG AGENT_WORKDIR=/home/${user}/agent
 ENV HOME=/home/${user} \
     AGENT_WORKDIR=${AGENT_WORKDIR}
 
-RUN groupadd -g ${gid} ${group} && \
+RUN userdel --remove ubuntu 2>/dev/null && \
+    groupadd -g ${gid} ${group} && \
     useradd -c "Jenkins user" -d $HOME -u ${uid} -g ${gid} -m ${user} -s /bin/bash && \
     mkdir /home/${user}/.jenkins && mkdir -p ${AGENT_WORKDIR} && \
     chown -R ${user}:${group} /home/${user}/ && \
