@@ -38,7 +38,9 @@ ENV COMPOSER_HOME=/.composer \
     # https://github.com/nvm-sh/nvm/releases
     NVM_VERSION=0.40.1 \
     # https://github.com/google/go-containerregistry/releases
-    GCRANE_VERSION=0.20.2
+    GCRANE_VERSION=0.20.2 \
+    # https://github.com/git-ecosystem/git-credential-manager/releases
+    GCM_VERSION=2.6.0
 ENV TZ=Australia/Melbourne \
     JDKVERSION=17 \
     JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 \

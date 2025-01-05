@@ -272,6 +272,15 @@ chmod +x     /usr/local/bin/sops
 
 
 #-------------------------------------------------------------------------
+# Installs Git Credentials Manager ---------------------------------------
+#-------------------------------------------------------------------------
+curl -fsSLo /tmp/gcm.deb https://github.com/git-ecosystem/git-credential-manager/releases/download/v${GCM_VERSION:?}/gcm-linux_amd64.${GCM_VERSION:?}.deb
+dpkg -i /tmp/gcm.deb
+apt install -y pass
+
+
+
+#-------------------------------------------------------------------------
 # Finishing & clean up ---------------------------------------------------
 #-------------------------------------------------------------------------
 apt clean
