@@ -21,10 +21,7 @@ if [[ "$JAVA_HOME" != /usr/lib/jvm/java-${JDKVERSION:-17}-openjdk-amd64* ]]; the
 fi
 
 if [[ -f "$INIT_SCRIPT" ]]; then
-	cp $INIT_SCRIPT /tmp/init.sh
-	chmod +x /tmp/init.sh
-	/tmp/init.sh
-	rm -rf /tmp/init.sh
+	source $INIT_SCRIPT
 fi
 
 if [[ "${JDKVERSION}" == "8" ]]; then
