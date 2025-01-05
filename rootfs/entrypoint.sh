@@ -28,6 +28,9 @@ if [[ "${JDKVERSION}" == "8" ]]; then
 	if [[ ! -f /home/jenkins/.mavenrc ]]; then
 		gosu jenkins sh -c "echo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 > /home/jenkins/.mavenrc"
 	fi
+fi
+
+if [[ ${JDKVERSION:-17} -lt 17 ]]; then
 	# agent must run with JDK 17
 	gosu jenkins sh -c "JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 jenkins-agent $@"
 else
