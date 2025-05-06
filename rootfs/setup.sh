@@ -114,6 +114,7 @@ echo -e '[compute]\ngce_metadata_read_timeout_sec = 30' >> /usr/lib/google-cloud
 curl -fsSL https://github.com/google/go-containerregistry/releases/download/v${GCRANE_VERSION:?}/go-containerregistry_Linux_x86_64.tar.gz | tar -C /usr/local/bin -xvzf - gcrane 
 
 
+
 #-------------------------------------------------------------------------
 # install cloud_sql_proxy ------------------------------------------------
 #-------------------------------------------------------------------------
@@ -278,6 +279,14 @@ chmod +x     /usr/local/bin/sops
 curl -fsSLo /tmp/gcm.deb https://github.com/git-ecosystem/git-credential-manager/releases/download/v${GCM_VERSION:?}/gcm-linux_amd64.${GCM_VERSION:?}.deb
 dpkg -i /tmp/gcm.deb
 apt install -y pass
+
+
+
+#-------------------------------------------------------------------------
+# Installs Venom ---------------------------------------------------------
+#-------------------------------------------------------------------------
+curl  -fsSLo /usr/local/bin/venom https://github.com/ovh/venom/releases/download/v${VENOM_VERSION:?}/venom.linux-amd64
+chmod +x     /usr/local/bin/venom
 
 
 

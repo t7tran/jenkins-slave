@@ -39,6 +39,8 @@ ENV COMPOSER_HOME=/.composer \
     TERRAFORM_VERSION=1.11.4 \
     # https://github.com/aquasecurity/trivy/releases
     TRIVY_VERSION=0.62.0 \
+    # https://github.com/ovh/venom/releases
+    VENOM_VERSION=1.2.0 \
     # https://github.com/mikefarah/yq/releases
     YQ_VERSION=4.45.2
 ENV TZ=Australia/Melbourne \
