@@ -200,6 +200,7 @@ chown -R jenkins:jenkins /home/jenkins/.sf /home/jenkins/.cache /home/jenkins/.n
 echo y | gosu jenkins sf plugins install sfdmu@${SFDMU_VERSION:?}
 echo y | gosu jenkins sf plugins install @salesforce/sfdx-scanner@${SFDX_SCANNER_VERSION:?}
 echo y | gosu jenkins sf plugins install sfdx-git-delta@${SFDX_GITDELTA_VERSION:?}
+echo y | gosu jenkins sf plugins install community@${SFDX_COMMUNITY_VERSION:?}
 mv /home/jenkins/.local/share/sf /usr/local/share/
 chown -R root:root /usr/local/share/sf
 ln -s /usr/local/share/sf /home/jenkins/.local/share/sf
