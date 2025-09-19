@@ -221,7 +221,7 @@ apt install -y php-xml php-mbstring php-curl
 mkdir -p ${COMPOSER_HOME:?}/cache
 chmod 777 ${COMPOSER_HOME:?}/cache
 mkdir -p ${COMPOSER_HOME:?}/vendor/bin
-curl -sSL https://getcomposer.org/installer | php -- --1 --install-dir=${COMPOSER_HOME:?}/vendor/bin --filename=composer
+curl -sSL https://getcomposer.org/installer | php -- --install-dir=${COMPOSER_HOME:?}/vendor/bin --filename=composer
 
 
 
