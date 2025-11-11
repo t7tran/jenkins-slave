@@ -183,6 +183,7 @@ echo pnpm                            >> ${NVM_DIR:?}/default-packages
 echo nexus-npm                       >> ${NVM_DIR:?}/default-packages
 echo @salesforce/cli@${SF_VERSION:?} >> ${NVM_DIR:?}/default-packages
 nvm-sh install --lts
+nvm-sh install 22
 nvm-sh install 20
 nvm-sh install 18
 nvm-sh install 16
