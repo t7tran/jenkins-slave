@@ -6,13 +6,13 @@ FROM ubuntu:24.04
 
 ENV COMPOSER_HOME=/.composer \
     # https://github.com/aws/aws-cli/tags 
-    AWSCLI_VERSION=2.31.25 \
+    AWSCLI_VERSION=2.31.33 \
     # apt-cache madison docker-ce
-    DOCKER_VERSION=5:28.5.1-1~ubuntu.24.04~noble \
+    DOCKER_VERSION=5:29.0.0-1~ubuntu.24.04~noble \
     # https://github.com/tianon/gosu/releases
     GOSU_VERSION=1.19 \
     # https://github.com/docker/compose/releases
-    DOCKER_COMPOSE_VERSION=2.40.2 \
+    DOCKER_COMPOSE_VERSION=2.40.3 \
     # https://github.com/google/go-containerregistry/releases
     GCRANE_VERSION=0.20.6 \
     # https://github.com/git-ecosystem/git-credential-manager/releases
@@ -24,13 +24,13 @@ ENV COMPOSER_HOME=/.composer \
     # https://github.com/nvm-sh/nvm/releases
     NVM_VERSION=0.40.3 \
     # https://www.npmjs.com/package/@salesforce/cli?activeTab=versions
-    SF_VERSION=2.109.7 \
+    SF_VERSION=2.111.7 \
     # https://www.npmjs.com/package/sfdmu?activeTab=versions
     SFDMU_VERSION=4.38.0 \
     # https://www.npmjs.com/package/@salesforce/plugin-code-analyzer?activeTab=versions
     SFDX_CODE_ANALYZER_VERSION=5.6.1 \
     # https://www.npmjs.com/package/@salesforce/plugin-community?activeTab=versions
-    SFDX_COMMUNITY_VERSION=3.3.44 \
+    SFDX_COMMUNITY_VERSION=3.3.45 \
     # https://www.npmjs.com/package/@salesforce/sfdx-scanner?activeTab=versions
     SFDX_SCANNER_VERSION=4.12.0 \
     # https://www.npmjs.com/package/sfdx-git-delta?activeTab=versions
@@ -40,7 +40,7 @@ ENV COMPOSER_HOME=/.composer \
 	# https://github.com/GoogleCloudPlatform/cloudsql-proxy/releases
     SQLPROXY_VERSION=2.19.0 \
     # https://github.com/hashicorp/terraform/releases
-    TERRAFORM_VERSION=1.13.4 \
+    TERRAFORM_VERSION=1.13.5 \
     # https://github.com/aquasecurity/trivy/releases
     TRIVY_VERSION=0.67.2 \
     # https://github.com/ovh/venom/releases
