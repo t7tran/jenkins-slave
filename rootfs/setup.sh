@@ -265,6 +265,7 @@ ln -s /opt/trivy/trivy /usr/bin/trivy
 #-------------------------------------------------------------------------
 # Installs Semgrep -------------------------------------------------------
 #-------------------------------------------------------------------------
+apt remove python3-jwt -y
 python3 -m pip install semgrep --no-warn-script-location --break-system-packages
 # python3 -m pip install --upgrade requests --no-warn-script-location --break-system-packages # fix warning: urllib3 (1.26.10) or chardet (3.0.4) doesn't match a supported version
 
@@ -281,7 +282,7 @@ chmod +x     /usr/local/bin/sops
 #-------------------------------------------------------------------------
 # Installs Git Credentials Manager ---------------------------------------
 #-------------------------------------------------------------------------
-curl -fsSLo /tmp/gcm.deb https://github.com/git-ecosystem/git-credential-manager/releases/download/v${GCM_VERSION:?}/gcm-linux_amd64.${GCM_VERSION:?}.deb
+curl -fsSLo /tmp/gcm.deb https://github.com/git-ecosystem/git-credential-manager/releases/download/v${GCM_VERSION:?}/gcm-linux-x64-${GCM_VERSION:?}.deb
 dpkg -i /tmp/gcm.deb
 apt install -y pass
 
