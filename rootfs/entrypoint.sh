@@ -14,10 +14,10 @@ fi
 if [[ "${JDKVERSION}" == "8" ]]; then
 	update-alternatives --set java /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
 else
-	update-alternatives --set java /usr/lib/jvm/java-${JDKVERSION:-17}-openjdk-amd64/bin/java
+	update-alternatives --set java /usr/lib/jvm/java-${JDKVERSION:-25}-openjdk-amd64/bin/java
 fi
-if [[ "$JAVA_HOME" != /usr/lib/jvm/java-${JDKVERSION:-17}-openjdk-amd64* ]]; then
-	echo JAVA_HOME must be set to /usr/lib/jvm/java-${JDKVERSION:-17}-openjdk-amd64
+if [[ "$JAVA_HOME" != /usr/lib/jvm/java-${JDKVERSION:-25}-openjdk-amd64* ]]; then
+	echo JAVA_HOME must be set to /usr/lib/jvm/java-${JDKVERSION:-25}-openjdk-amd64
 fi
 
 if [[ -f "$INIT_SCRIPT" ]]; then
@@ -30,9 +30,9 @@ if [[ "${JDKVERSION}" == "8" ]]; then
 	fi
 fi
 
-if [[ ${JDKVERSION:-17} -lt 17 ]]; then
-	# agent must run with JDK 17
-	gosu jenkins sh -c "JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 jenkins-agent $@"
+if [[ ${JDKVERSION:-25} -lt 25 ]]; then
+	# agent must run with JDK 25
+	gosu jenkins sh -c "JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64 jenkins-agent $@"
 else
 	exec gosu jenkins jenkins-agent $@
 fi

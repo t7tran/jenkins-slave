@@ -1,5 +1,5 @@
 # https://hub.docker.com/r/jenkins/inbound-agent/tags?ordering=last_updated&name=3355.
-FROM jenkins/inbound-agent:3355.v388858a_47b_33-19-jdk17 AS jnlp
+FROM jenkins/inbound-agent:3355.v388858a_47b_33-19-jdk25 AS jnlp
 # https://hub.docker.com/r/alpine/helm/tags?ordering=last_updated&name=2.17
 FROM alpine/helm:2.17.0 AS helm
 FROM ubuntu:24.04
@@ -48,8 +48,8 @@ ENV COMPOSER_HOME=/.composer \
     # https://github.com/mikefarah/yq/releases
     YQ_VERSION=4.53.2
 ENV TZ=Australia/Melbourne \
-    JDKVERSION=17 \
-    JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 \
+    JDKVERSION=25 \
+    JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64 \
     NVM_DIR=/nvm \
     PATH=$COMPOSER_HOME/vendor/bin:$PATH
 

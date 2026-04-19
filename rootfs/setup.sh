@@ -56,7 +56,7 @@ gosu nobody true
 #-------------------------------------------------------------------------
 # install openjdk --------------------------------------------------------
 #-------------------------------------------------------------------------
-apt install -y openjdk-17-jdk
+apt install -y openjdk-25-jdk
 apt install -y openjdk-11-jdk
 apt install -y openjdk-8-jdk
 
