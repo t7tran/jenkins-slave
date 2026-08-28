@@ -79,10 +79,13 @@ done
 #-------------------------------------------------------------------------
 # install docker ---------------------------------------------------------
 #-------------------------------------------------------------------------
-apt install -y apt-transport-https ca-certificates software-properties-common
-curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
-apt-key fingerprint 0EBFCD88
-add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+apt install -y apt-transport-https ca-certificates
+# apt-key was removed in recent Ubuntu releases; use a signed-by keyring instead
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+chmod a+r /etc/apt/keyrings/docker.gpg
+gpg --show-keys --with-fingerprint /etc/apt/keyrings/docker.gpg
+echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" > /etc/apt/sources.list.d/docker.list
 # list docker-ce versions: apt-cache madison docker-ce
 apt update && apt install -y docker-ce=${DOCKER_VERSION:?}
 
@@ -99,9 +102,10 @@ chmod +x /usr/local/bin/docker-compose
 #-------------------------------------------------------------------------
 # install gcloud SDK -----------------------------------------------------
 #-------------------------------------------------------------------------
-echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-apt update && apt install -y google-cloud-sdk google-cloud-sdk-gke-gcloud-auth-plugin
+curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+chmod a+r /usr/share/keyrings/cloud.google.gpg
+echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" > /etc/apt/sources.list.d/google-cloud-sdk.list
+apt update && apt install -y google-cloud-cli google-cloud-cli-gke-gcloud-auth-plugin
 gosu jenkins gcloud config set core/disable_usage_reporting true
 gosu jenkins gcloud config set component_manager/disable_update_check true
 gosu jenkins gcloud config set metrics/environment github_docker_image
