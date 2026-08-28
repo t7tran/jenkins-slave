@@ -1,7 +1,7 @@
 # https://hub.docker.com/r/jenkins/inbound-agent/tags?ordering=last_updated&name=3386.
 FROM jenkins/inbound-agent:3386.v353e57a_1b_ea_0-2-jdk25 AS jnlp
-# https://hub.docker.com/r/alpine/helm/tags?ordering=last_updated&name=2.17
-FROM alpine/helm:2.17.0 AS helm
+# https://hub.docker.com/r/alpine/helm/tags?ordering=last_updated&name=4.2
+FROM alpine/helm:4.2.4 AS helm
 FROM ubuntu:26.04
 
 ENV COMPOSER_HOME=/.composer \
