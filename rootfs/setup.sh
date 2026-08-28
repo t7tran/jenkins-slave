@@ -140,7 +140,9 @@ unzip /tmp/awscliv2.zip -d /tmp
 #-------------------------------------------------------------------------
 # install azure-cli ------------------------------------------------------
 #-------------------------------------------------------------------------
-curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+# packages.microsoft.com publishes an empty "resolute" dist, so the installer
+# finds it and skips its own fallback; pin DIST_CODE until MS populates it
+curl -sL https://aka.ms/InstallAzureCLIDeb | DIST_CODE=noble bash
 curl -fsSLo /tmp/kubelogin.zip https://github.com/Azure/kubelogin/releases/download/v${KUBELOGIN_VERSION:?}/kubelogin-linux-amd64.zip
 unzip -j /tmp/kubelogin.zip -d /usr/local/bin/
 
