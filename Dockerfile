@@ -6,31 +6,31 @@ FROM ubuntu:26.04
 
 ENV COMPOSER_HOME=/.composer \
     # https://github.com/aws/aws-cli/tags 
-    AWSCLI_VERSION=2.36.33 \
+    AWSCLI_VERSION=2.39.4 \
     # apt-cache madison docker-ce
-    DOCKER_VERSION=5:29.7.2-1~ubuntu.26.04~resolute \
+    DOCKER_VERSION=5:29.9.3-1~ubuntu.26.04~resolute \
     # https://github.com/tianon/gosu/releases
-    GOSU_VERSION=1.19 \
+    GOSU_VERSION=1.20 \
     # https://github.com/docker/compose/releases
-    DOCKER_COMPOSE_VERSION=5.5.0 \
+    DOCKER_COMPOSE_VERSION=5.7.0 \
     # https://github.com/google/go-containerregistry/releases
-    GCRANE_VERSION=0.22.0 \
+    GCRANE_VERSION=0.22.1 \
     # https://github.com/git-ecosystem/git-credential-manager/releases
-    GCM_VERSION=2.9.1 \
+    GCM_VERSION=3.0.2 \
     # https://github.com/Azure/kubelogin/releases
-    KUBELOGIN_VERSION=0.2.19 \
+    KUBELOGIN_VERSION=0.2.22 \
     # https://archive.apache.org/dist/maven/maven-3
     MAVEN_VERSIONS='3.6.0 3.6.3' \
     # https://github.com/nvm-sh/nvm/releases
-    NVM_VERSION=0.40.7 \
+    NVM_VERSION=0.41.0 \
     # https://www.npmjs.com/package/@salesforce/cli?activeTab=versions
-    SF_VERSION=2.149.9 \
+    SF_VERSION=2.157.8 \
     # https://www.npmjs.com/package/sfdmu?activeTab=versions
     SFDMU_VERSION=5.8.0 \
     # https://www.npmjs.com/package/@salesforce/plugin-code-analyzer?activeTab=versions
     SFDX_CODE_ANALYZER_VERSION=5.16.0 \
     # https://www.npmjs.com/package/@salesforce/plugin-community?activeTab=versions
-    SFDX_COMMUNITY_VERSION=4.0.5 \
+    SFDX_COMMUNITY_VERSION=4.0.22 \
     # https://www.npmjs.com/package/@salesforce/sfdx-scanner?activeTab=versions
     SFDX_SCANNER_VERSION=4.12.0 \
     # https://www.npmjs.com/package/sfdx-git-delta?activeTab=versions
@@ -38,15 +38,15 @@ ENV COMPOSER_HOME=/.composer \
     # https://github.com/mozilla/sops/releases
     SOPS_VERSION=3.13.3 \
 	# https://github.com/GoogleCloudPlatform/cloudsql-proxy/releases
-    SQLPROXY_VERSION=2.25.4 \
+    SQLPROXY_VERSION=2.27.0 \
     # https://github.com/hashicorp/terraform/releases
-    TERRAFORM_VERSION=1.10.0 \
+    TERRAFORM_VERSION=1.17.1 \
     # https://github.com/aquasecurity/trivy/releases
-    TRIVY_VERSION=0.74.0 \
+    TRIVY_VERSION=0.76.1 \
     # https://github.com/ovh/venom/releases
-    VENOM_VERSION=1.4.0-beta.1 \
+    VENOM_VERSION=1.4.0-beta.4 \
     # https://github.com/mikefarah/yq/releases
-    YQ_VERSION=4.53.6
+    YQ_VERSION=4.54.1
 ENV TZ=Australia/Melbourne \
     JDKVERSION=25 \
     JAVA_HOME=/usr/lib/jvm/java-25-openjdk-amd64 \
