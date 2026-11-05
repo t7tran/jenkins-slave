@@ -1,7 +1,7 @@
-# https://hub.docker.com/r/jenkins/inbound-agent/tags?ordering=last_updated&name=3386.
-FROM jenkins/inbound-agent:3386.v353e57a_1b_ea_0-2-jdk25 AS jnlp
-# https://hub.docker.com/r/alpine/helm/tags?ordering=last_updated&name=4.2
-FROM alpine/helm:4.2.4 AS helm
+# https://hub.docker.com/r/jenkins/inbound-agent/tags?ordering=last_updated&name=3395.
+FROM jenkins/inbound-agent:3395.v6e5377b_0fb_3c-3-jdk25 AS jnlp
+# https://hub.docker.com/r/alpine/helm/tags?ordering=last_updated&name=4.3
+FROM alpine/helm:4.3.1 AS helm
 FROM ubuntu:26.04
 
 ENV COMPOSER_HOME=/.composer \
@@ -63,7 +63,7 @@ COPY --from=helm /usr/bin/helm /usr/local/bin/helm
 # https://github.com/jenkinsci/docker-agent/blob/master/debian/Dockerfile
 
 # https://repo.jenkins-ci.org/artifactory/public/org/jenkins-ci/main/remoting/
-ARG VERSION=3386.v353e57a_1b_ea_0
+ARG VERSION=3395.v6e5377b_0fb_3c
 ARG user=jenkins
 ARG group=jenkins
 ARG uid=1000
