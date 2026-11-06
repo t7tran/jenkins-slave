@@ -5,7 +5,9 @@ mv /home/source/.* /home/jenkins/ &>/dev/null
 
 set -e
 
-cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+# /etc/localtime is a symlink to Etc/UTC on Ubuntu: `cp` would write through it and overwrite
+# the system's UTC zone file with $TZ's rules, so anything asking for UTC would get local time
+ln -sf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 if [[ -f "$SERVICE_ACCOUNT_JSON" ]]; then
 	gcloud auth activate-service-account --key-file=$SERVICE_ACCOUNT_JSON &> /dev/null
