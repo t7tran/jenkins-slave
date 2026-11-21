@@ -31,7 +31,8 @@ apt-get install -y \
                 mysql-client \
                 git git-lfs \
                 skopeo \
-                rsync
+                rsync \
+                iputils-ping
 # required by MariaDB4j
 # see https://github.com/MariaDB4j/MariaDB4j#faq
 curl -fsSLo /tmp/libtinfo.deb https://archive.ubuntu.com/ubuntu/pool/universe/n/ncurses/libtinfo5_6.3-2_amd64.deb && dpkg -i /tmp/libtinfo.deb && rm -f /tmp/libtinfo.deb
